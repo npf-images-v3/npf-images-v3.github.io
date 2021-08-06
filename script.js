@@ -40,11 +40,9 @@ $(document).ready(function(){
     
     // new captions
     $("[post-type='text'] p:first + .npf_inst").each(function(){
-        if($.trim($(this).prev()) == ""){
+        if($.trim($(this).prev().text()) == ""){
             $(this).addClass("p-empty")
         }
     });
-    
-    // some weird shit here hahaHAAAAAA
 
 })//end ready
