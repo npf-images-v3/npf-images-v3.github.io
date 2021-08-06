@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="ie"><![endif]-->
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+    <head>
+        <link rel="icon" href="//assets.tumblr.com/images/favicons/favicon.ico?1 ?>"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="x-dns-prefetch-control" content="off"/>
+        <meta name="robots" content="noindex"/>
+        <title>Not found.</title>
+        <link rel="stylesheet" media="screen" href="//assets.tumblr.com/assets/styles/404.css?_v=994f31f9bd89e01a64c5da215547f5cf">    </head>
+    <body>
+
+        <div id="fullscreen_post_bg" class="fullscreen_post_bg loading"></div>
+
+        <div class="logo_button_bar">
+            <div id="logo" class="tumblr_logo"><a href="//www.tumblr.com/" data-translation="tumblr">Tumblr</a></div>
+            <div class="buttons logged_in" id="logged_in_buttons">
+            </div>
+            <div class="buttons logged_out" id="logged_out_buttons">
+                <a class="chrome" href="https://www.tumblr.com/login" data-translation="log_in">Log in</a>
+                <a class="chrome blue" href="https://www.tumblr.com/register" data-translation="sign_up">Sign Up</a>
+            </div>
+            <div class="post_attribution no_attribution" id="post_attribution">
+                <a href="//www.tumblr.com" target="_blank" rel="nofollow" id="blog_name_link"><span data-translation="posted_by">Posted by</span> <strong id="blog_name"></strong></a>
+                <a href="//www.tumblr.com" target="_blank" rel="nofollow" class="post_avatar" id="blog_avatar_link"><img src="//assets.tumblr.com/images/transparent-pixel.png" alt="" id="blog_avatar"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="content">
+            <div class="valign_outer">
+                <div class="valign_inner">
+                    <div class="l-container narrow_box">
+                        <h1 data-translation="heading">There's nothing here.</h1>
+                        <p data-translation="message">Whatever you were looking for doesn't currently exist at this address. Unless you were looking for this error page, in which case: Congrats! You totally found it.</p>
+
+                        <form method="get" action="//www.tumblr.com/search" id="search_form" class="search_form" role="search">
+                            <input type="hidden" name="referring_page" id="referring_page" value="404">
+                            <input type="hidden" name="scope" id="search_scope" value="all_of_tumblr">
+                            <div class="search_form_row">
+                                <div class="search_form_field">
+                                    <input tabindex="1" type="text" name="q" id="search_query" placeholder="Search Tumblr" value="" class="search_query popover_button " autocomplete="off" data-translation="search_tags">
+                                </div>
+                                <button type="submit" id="search_query_submit" class="search_query_submit" data-translation="search">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" language="javascript">var status_code = '404';</script>
+        <script type="text/javascript" language="javascript" src="//assets.tumblr.com/languages/errors.js?_v=a8001e647c472837c4d6b0087bb7b520"></script>
+        <script src="//assets.tumblr.com/assets/scripts/_t.js?_v=e2fbd9f9afd31544e9a48e2e5fe5609b"></script>        <script src="//assets.tumblr.com/assets/scripts/tumblr/error_page.js?_v=fc25599ea679818a4f43eb4d5399842f"></script>
+        <script type="text/javascript">
+            (function() {
+                Tumblr.ErrorPage.apply_error_translations('404');
+                Tumblr.ErrorPage.load_random_image(document.getElementById('fullscreen_post_bg'));
+                if (_t.isLoggedIn()) {
+                    document.getElementById('logged_in_buttons').style.display = 'block';
+                    document.getElementById('logged_out_buttons').style.display = 'none';
+                } else {
+                    // No logged out search, so go directly to the tag page
+                    document.getElementById('search_form').onsubmit = function(e) {
+                        e.cancelBubble = true;
+                        e.preventDefault();
+                        var query = document.getElementById('search_query').value;
+                        if (!query) return false;
+                        query = query.replace(/[\/]/i, ' ');
+                        window.location.href = '//www.tumblr.com/tagged/' + encodeURIComponent(query) + '?referring_page=404';
+                        return false;
+                    };
+                }
+                var search_query = document.getElementById('search_query');
+                var search_form_row = search_query.parentNode.parentNode;
+                search_query.onfocus = function() {
+                    _t.addClass(search_form_row, 'focus');
+                };
+                search_query.onblur = function() {
+                    _t.removeClass(search_form_row, 'focus');
+                };
+                // search_query.focus();
+            })();
+        </script>
+
+    </body>
+</html>
+<style>iframe {display:none !important;}</style>
