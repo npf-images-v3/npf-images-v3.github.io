@@ -42,7 +42,7 @@ $(document).ready(function(){
     $("[post-type='text'] p:first").each(function(){
         if($(this).next().is(".npf_inst")){
             if($.trim($(this).text()) == ""){
-                $(this).addClass("haha-empty")
+                $(this).next().addClass("photo-origin")
             }
         }
     });
