@@ -45,6 +45,6 @@ $(document).ready(function(){
         }
     });
     
-    // some weird shit here haha
+    // some weird shit here hahaHAAAAAA
 
 })//end ready
