@@ -39,10 +39,8 @@ $(document).ready(function(){
     });
     
     // new captions
-    $("[post-type='text'] p:first + .npf_inst").each(function(){
-        if($.trim($(this).prev().text()) == ""){
-            $(this).prev().addClass("pee-empty")
-        }
+    $("[post-type='text'] p:first").each(function(){
+            $(this).addClass("see-empty")
     });
 
 })//end ready
