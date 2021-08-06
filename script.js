@@ -40,9 +40,9 @@ $(document).ready(function(){
     
     // new captions
     $("[post-type='text'] p:first + .npf_inst").each(function(){
-        
-            $(this).prev().addClass("p-empty")
-        
+        if($.trim($(this).prev().text()) == ""){
+            $(this).prev().addClass("pee-empty")
+        }
     });
 
 })//end ready
