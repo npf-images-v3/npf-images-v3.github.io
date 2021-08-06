@@ -40,7 +40,11 @@ $(document).ready(function(){
     
     // new captions
     $("[post-type='text'] p:first").each(function(){
-            $(this).addClass("see-empty")
+        if($(this).next().is(".npf_inst")){
+            if($.trim($(this).text()) == ""){
+                $(this).addClass("haha-empty")
+            }
+        }
     });
 
 })//end ready
