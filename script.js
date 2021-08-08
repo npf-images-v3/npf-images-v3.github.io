@@ -160,5 +160,53 @@ $(document).ready(function(){
             high_res:imgsrc
         }]);
     });
+    
+    // assign unique ID to each NPF photoset
+    $(".npf_inst").each(function(){
+        $(this).attr("npf-id","npf_" + Math.random().toString(36).substr(2, 5))
+    });
+    
+    // initialize number of images in each NPF photoset,
+    // and create an numerically labelled list
+    $(".npf_inst").each(function(){
+        $(this).find(".tmblr-full").each(function(i){
+            i = i + 1;
+            $(this).attr("list-order",i);
+        });
+        
+        $(this).find(".tmblr-full img").each(function(w){
+            w = w + 1;
+            $(this).parents(".npf_inst").attr("image" + w,$(this).attr("src"))
+        });
+    })
+    
+    // initialize lightbox + clickthrough
+    $(".tmblr-full img").click(function(){
+        var npfID = $(this).parents("[npf-id]").attr("npf-id");
+        var npford = $(this).parents(".tmblr-full").attr("list-order");
+        var npfmax = $(this).parents(".npf_inst")
+                     .find(".tmblr-full").length;
+        
+        $(document).on("click", ".lightbox-image", function(){
+            $(this).attr("npf-id",npfID).attr("order",npford);
+            
+            $(".npf_inst").each(function(){
+                if($(this).attr("npf-id") == $(".lightbox-image").attr("npf-id")){
+                    
+                    npford = Number(npford)+1;
+                    
+                    if($(this).is("[image" + npford + "]")){
+                        // $(".lightbox-image").removeAttr("src");
+                        var getnext = $(this).attr("image" + npford);
+                        $(".lightbox-image").attr("src",getnext)
+                    } else {
+                        if($(".lightbox-image").attr("order") > npfmax){
+                            $(".lightbox-image").removeAttr("order");
+                        }
+                    }
+                }
+            })
+        })
+    })
 
 })//end ready
