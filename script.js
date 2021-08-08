@@ -35,8 +35,41 @@ $(document).ready(function(){
     
     // old captions
     $("[post-type='text'] p:first-child + blockquote > .npf_inst:first-child").each(function(){
-        $(this).addClass("photo_origin");
+        $(this).addClass("photo-origin capt-old");
     });
+    
+    $(".capt-old").each(function(){
+        // target default generated source blog name/url
+        var jus = $(this).parent("blockquote").prev("p");
+        
+        if(jus.find("a.tumblr_blog")){
+            jus.addClass("utilisateur");
+            
+            if($(this).next().length){
+                // if it's the only npf of that post, relocate
+                if(!$(this).nextAll(".npf_inst").length){
+                    $(this).insertBefore($(this).parents("[post-type]").find(".utilisateur"))
+                }
+            } else {
+                jus.attr("contents",jus.text());
+                jus.attr("perma",jus.find("a.tumblr_blog").attr("href"));
+                
+                // remove ":" after username if there is one
+                if(jus.attr("contents").slice(-1) == ":"){
+                    jus.attr("contents",jus.text().substring(0,jus.text().lastIndexOf(":")))
+                }
+                
+                // remove blockquote
+                $(this).unwrap();
+                
+                // append source blog after the image
+                $(this).after("<p class='post-source'>(Source: <a href='" + jus.attr("perma") + "'>" + jus.attr("contents") + "</a>)</p>");
+                jus.remove();
+            }
+        }
+    })
+    
+    /*-----------------------------------------------*/
     
     // new captions
     $("[post-type='text']").each(function(){
@@ -103,5 +136,29 @@ $(document).ready(function(){
             }
         }
     })
+    
+    /*-----------------------------------------------*/
+    
+    // wrap single npf images in <a>
+    $(".tmblr-full[data-orig-height]").each(function(){
+        if(!$(this).find("a.post_media_photo_anchor").length){
+            var imgurl = $(this).find("img").attr("src");
+            $(this).find("img").wrap("<a class='post_media_photo_anchor' data-big-photo='" + imgurl + "' data-big-photo-height='" + $(this).attr("data-orig-height") + "' data-big-photo-width='" + $(this).attr("data-orig-width") + "'></a>");
+            $(this).find("img").addClass("post_media_photo t-solo image");
+            $(this).find("img").removeAttr("data-orig-height data-orig-width width height")
+        }
+        
+    })
+    
+    // initiate lightbox on images that didn't originally
+    // come with photo anchor
+    $(".t-solo").click(function(){	
+        var imgsrc = $(this).attr("src");
+        
+        Tumblr.Lightbox.init([{
+            low_res:imgsrc,
+            high_res:imgsrc
+        }]);
+    });
 
 })//end ready
