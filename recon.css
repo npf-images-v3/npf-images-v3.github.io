@@ -58,6 +58,7 @@ p + .npf_row {
 .tmblr-full img {
     cursor:pointer;
     vertical-align:middle;
+    width:100%;
 }
 
 .lb-cont {
