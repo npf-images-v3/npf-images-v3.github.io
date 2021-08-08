@@ -92,6 +92,14 @@ $(document).ready(function(){
         }
     })
     
+    $(".tumblr_avatar + .tumblr_blog").each(function(){
+        $(this).add($(this).prev()).wrapAll("<div class='source-head'>")
+    })
+    
+    $(".source-head + .npf_inst").each(function(){
+        $(this).addClass("photo-origin")
+    })
+    
     $(".photo-origin").each(function(){
         // target source blog link
         $(this).parents("[post-type='text']")
@@ -138,11 +146,9 @@ $(document).ready(function(){
         })
         
         // if post has a caption, relocate
-        if($(this).prev().is("[empty-p]")){
-            if($(this).next().length){
-                $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
-                $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
-            }
+        if($(this).next().length){
+            $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
+            $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
         }
     })
     
