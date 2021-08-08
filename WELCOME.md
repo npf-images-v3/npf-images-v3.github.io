@@ -116,4 +116,7 @@ However if you're using modern dashboard captions, depending on your theme, the 
 * copy your full theme code into [ghostbin.com](https://ghostbin.com) - no title or password required - hit save, then send me the link!
 
 ---
-If this helped you, I'm happy! Please consider reblogging [the post](#LINKTBA) so more people hear about this! ~~Together, we fight NPF~~~
+If this helped you, I'm happy! Please consider reblogging [the post](https://glenthemes.tumblr.com) so more people hear about this!  
+~~Together, we fight NPF~~~  
+
+much love
