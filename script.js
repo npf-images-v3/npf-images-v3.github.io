@@ -83,6 +83,15 @@ $(document).ready(function(){
         })
     });
     
+    // check if unnested captions
+    $("[empty-p]").each(function(){
+        if($(this).prev(".tumblr_parent").length){
+            if($(this).prev().find("img") && $(this).prev().find("a")){
+                $(this).prev(".tumblr_parent").addClass("source-head")
+            }
+        }
+    })
+    
     $(".photo-origin").each(function(){
         // target source blog link
         $(this).parents("[post-type='text']")
