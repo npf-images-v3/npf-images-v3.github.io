@@ -160,7 +160,7 @@ $(document).ready(function(){
         $(this).unwrap()
     })
     
-    $(".misery").each(function(){
+    $(".npf_row.misery").each(function(){
         if(!$(this).find(".npf_col").length){
             $(this).children().wrap("<div class='npf_col'>")
         }
