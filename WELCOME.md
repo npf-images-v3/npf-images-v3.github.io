@@ -117,6 +117,4 @@ However if you're using modern dashboard captions, depending on your theme, the 
 
 ---
 If this helped you, I'm happy! Please consider reblogging [the post](https://glenthemes.tumblr.com) so more people hear about this!  
-~~Together, we fight NPF~~~  
-
-much love
+🌟 HT | glenthemes
