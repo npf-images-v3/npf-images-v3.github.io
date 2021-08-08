@@ -150,6 +150,26 @@ $(document).ready(function(){
     
     /*-----------------------------------------------*/
     
+    // fallback if npf_row is somehow outside the container
+    $(".npf_row > .npf_inst").each(function(){
+        $(this).unwrap();
+        $(this).wrapInner("<div class='npf_row misery'>");
+    })
+    
+    $(".photo-origin > .npf_inst").each(function(){
+        $(this).unwrap()
+    })
+    
+    $(".misery").each(function(){
+        if(!$(this).find(".npf_col").length){
+            $(this).children().wrap("<div class='npf_col'>")
+        }
+        
+        $(this).parent(".npf_inst").addClass(".photo-origin");
+    })
+    
+    /*-----------------------------------------------*/
+    
     // wrap single npf images in <a>
     $(".tmblr-full[data-orig-height]").each(function(){
         if(!$(this).find("a.post_media_photo_anchor").length){
