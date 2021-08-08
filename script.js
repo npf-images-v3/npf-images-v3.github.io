@@ -39,12 +39,69 @@ $(document).ready(function(){
     });
     
     // new captions
-    $("[post-type='text'] p:first").each(function(){
-        if($(this).next().is(".npf_inst")){
-            if($.trim($(this).text()) == ""){
-                $(this).next().addClass("photo-origin")
+    $("[post-type='text']").each(function(){
+        $(this).find("p").eq(0).each(function(){
+            if($(this).next().is(".npf_inst")){
+                if($.trim($(this).text()) == ""){
+                    $(this).next().addClass("photo-origin");
+                    $(this).attr("empty-p","");
+                }
+            }
+        })
+    });
+    
+    $(".photo-origin").each(function(){
+        // target source blog link
+        $(this).parents("[post-type='text']")
+        .find("a[href*='tumblr.com/post']")
+        .eq(0).each(function(){
+            $(this).addClass("source-blog");
+            
+            if(!$(this).parent().is("[post-type]")){
+                if(!$(this).siblings().length){
+                    $(this).parent().addClass("source-blog");
+                    $(this).removeClass("source-blog");
+                }
+            }
+        })
+        
+        $(".source-blog").each(function(){
+            if($(this).prev().length){
+                // identify source blog avatar
+                if($(this).prev().is("img[src*='tumblr.com']")){
+                    $(this).prev().addClass("source-portrait");
+                }
+                
+                if($(this).prev().find("img[src*='tumblr.com']")){
+                    $(this).prev().addClass("source-portrait");
+                }
+                
+                if(!$(this).prev().prev().length){
+                    $(this).prev().addClass("source-portrait")
+                }
+                
+                // add or wrap ".source-head" class
+                if($(this).prev().is(".source-portrait")){
+                    if(!$(this).closest("[post-type]").length < 1){
+                        if(!$(this).next().length){
+                            $(this).parent().addClass("source-head")
+                        }
+                    }
+                    
+                    if($(this).next().length){
+                        $(this).add($(this).prev()).wrapAll("<div class='source-head'>")
+                    }
+                }
+            }
+        })
+        
+        // if post has a caption, relocate
+        if($(this).prev().is("[empty-p]")){
+            if($(this).next().length){
+                $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
+                $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
             }
         }
-    });
+    })
 
 })//end ready
