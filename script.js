@@ -84,14 +84,6 @@ $(document).ready(function(){
     });
     
     // check if unnested captions
-    $("[empty-p]").each(function(){
-        if($(this).prev(".tumblr_parent").length){
-            if($(this).prev().find("img") && $(this).prev().find("a")){
-                $(this).prev(".tumblr_parent").addClass("source-head")
-            }
-        }
-    })
-    
     $(".tumblr_avatar + .tumblr_blog").each(function(){
         $(this).add($(this).prev()).wrapAll("<div class='source-head'>")
     })
@@ -148,7 +140,11 @@ $(document).ready(function(){
         // if post has a caption, relocate
         if($(this).next().length){
             $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
-            $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
+            $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
+            
+            if($(this).closest(".tumblr_parent").length){
+                $(this).insertBefore($(this).parent())
+            }
         }
     })
     
