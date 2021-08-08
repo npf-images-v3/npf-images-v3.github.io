@@ -58,6 +58,9 @@ p + .npf_row {
 .tmblr-full img {
     cursor:pointer;
     vertical-align:middle;
+}
+
+.photo-origin .tmblr-full img {
     width:100%;
 }
 
