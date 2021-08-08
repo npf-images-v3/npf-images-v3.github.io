@@ -12,10 +12,12 @@
 ---
 
 #### Features:
+- [x] turns images HD if available
 - [x] prevents images from overflowing (stretching sideways)
 - [x] stops images from being squashed (default height is apparently 75%. WHO thought this was a good idea?!)
 - [x] custom spacing between images
 - [x] custom spacing between images and captions
+- [x] lightbox support (currently only works with mouse clicks, not arrow keys)
 - [x] repositions main image to top of post if they were meant to look like photo posts (e.g. for artists)
 - [x] removes the blockquote border on the main image
 
