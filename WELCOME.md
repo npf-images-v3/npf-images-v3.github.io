@@ -26,11 +26,17 @@
 #### How to install:
 1.  In your theme's HTML, use the searchbar and look up `{block:Posts`   
     Replace that line with `{block:posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}`
-2.  Check if your theme already has jQuery installed.  
+
+2.  On the next line or so, you should find something like `<div class="posts">`  
+    If there are multiple lines with a similar name, go for the one with `{PostID}` if it has one!  
+    Before the closing bracket `>`, add `post-type="{PostType}"`  
+
+3.  Check if your theme already has jQuery installed.  
     Use the searchbar to look up `jquery`, or `ajax.googleapis.com/ajax/libs/jquery`  
     If it exists, great. If you can't find it, paste this under `<head>`:  
     `<script src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>`
-3.  Paste the following **after** the jQuery line:  
+
+4.  Paste the following **after** the jQuery line:  
     ```html
     <script src="//npf-images-v3.github.io/script.js"></script>
     <link rel="stylesheet" href="//npf-images-v3.github.io/recon.css">
@@ -108,3 +114,6 @@ However if you're using modern dashboard captions, depending on your theme, the 
 * send a link to your blog
 * clarify what theme you are using, and by whom
 * copy your full theme code into [ghostbin.com](https://ghostbin.com) - no title or password required - hit save, then send me the link!
+
+---
+If this helped you, I'm happy! Please consider reblogging [the post](#LINKTBA) so more people hear about this! ~~Together, we fight NPF~~~
