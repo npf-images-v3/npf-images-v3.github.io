@@ -1,6 +1,7 @@
 .npf_row {
     margin-left:0!important;
     margin-right:0!important;
+    display:flex;
 }
 
 /* i dont even know what crt-video is but it's apparently in the default t*mblr stylesheet so I will go ahead and unpoop that */
