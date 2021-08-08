@@ -161,6 +161,11 @@ $(document).ready(function(){
         }]);
     });
     
+    // make npf images HD
+    $(".post_media_photo_anchor").each(function(){
+        $(this).find("img").attr("src",$(this).attr("data-big-photo"))
+    })
+    
     // assign unique ID to each NPF photoset
     $(".npf_inst").each(function(){
         $(this).attr("npf-id","npf_" + Math.random().toString(36).substr(2, 5))
@@ -196,9 +201,11 @@ $(document).ready(function(){
                     npford = Number(npford)+1;
                     
                     if($(this).is("[image" + npford + "]")){
-                        // $(".lightbox-image").removeAttr("src");
                         var getnext = $(this).attr("image" + npford);
-                        $(".lightbox-image").attr("src",getnext)
+                        $(".lightbox-image").attr("src",getnext);
+                        
+                        $(".lightbox-image").addClass("lb-img");
+                        $(".lightbox-image-container").addClass("lb-cont");
                     } else {
                         if($(".lightbox-image").attr("order") > npfmax){
                             $(".lightbox-image").removeAttr("order");
