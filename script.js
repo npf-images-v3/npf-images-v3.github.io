@@ -140,7 +140,8 @@ $(document).ready(function(){
         // if post has a caption, relocate
         if($(this).next().length){
             $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
-            $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
+            // $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
+            $(this).parents("[post-type]").find(".source-head").css("margin-top","var(--NPF-Caption-Spacing)");
             
             if($(this).closest(".tumblr_parent").length){
                 $(this).insertBefore($(this).parent())
