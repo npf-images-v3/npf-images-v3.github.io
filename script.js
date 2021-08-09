@@ -165,7 +165,7 @@ $(document).ready(function(){
             $(this).children().wrap("<div class='npf_col'>")
         }
         
-        $(this).parent(".npf_inst").addClass(".photo-origin");
+        $(this).parent(".npf_inst").addClass("photo-origin");
     })
     
     /*-----------------------------------------------*/
