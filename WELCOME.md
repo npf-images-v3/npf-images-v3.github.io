@@ -38,6 +38,10 @@
 
 4.  Paste the following **after** the jQuery line:  
     ```html
+    <!--
+            NPF images fix v3.0 by @glenthemes [2021]
+            💌 git.io/JRBt7
+    --->
     <script src="//npf-images-v3.github.io/script.js"></script>
     <link rel="stylesheet" href="//npf-images-v3.github.io/recon.css">
     <style tmblr-npf>
