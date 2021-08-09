@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2021/08/08 11:59PM GMT+8
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2021/08/09 06:12PM GMT+8
 
 #### What is NPF?
 > NPF stands for "Neue Post Format". Tumblr used to have multiple types of post formats to choose from (namingly text, photo, quote, link, chat, video, questions), but in recent years they've started to turn many of those formats into NPF only (in other words, **everything becomes a text post**). This means that all images uploaded via Tumblr mobile have turned into **NPF images**. NPF images can also refer to images between paragraphs.
@@ -120,5 +120,5 @@ However if you're using modern dashboard captions, depending on your theme, the 
 * copy your full theme code into [ghostbin.com](https://ghostbin.com) - no title or password required - hit save, then send me the link!
 
 ---
-If this helped you, I'm happy! Please consider reblogging [the post](https://glenthemes.tumblr.com) so more people hear about this!  
+If this helped you, I'm happy! Please consider reblogging [the post](https://glenthemes.tumblr.com/post/659034084446748672/npf-images-v3) so more people hear about this!  
 🌟 HT | glenthemes
