@@ -114,6 +114,24 @@ $(document).ready(function(){
     
     /*-----------------------------------------------*/
     
+    // make images in rows even (beta)
+    $(".npf_row .npf_col").each(function(){
+        $(this).attr("genheight",$(this).height());
+    });
+    
+    $(".npf_row").each(function(){
+        var que = $(this).find(".npf_col").map(function(){
+            return $(this).attr("genheight");
+        }).get();
+        
+        var shortest = Math.min.apply(Math,que);
+        $(this).attr("set-height",shortest);
+        
+        $(this).children(".npf_col").height(shortest).removeAttr("genheight")
+    });
+    
+    /*-----------------------------------------------*/
+    
     $(".photo-origin").each(function(){
         // target source blog link
         $(this).parents("[post-type='text']")
