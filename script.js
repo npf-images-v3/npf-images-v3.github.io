@@ -16,6 +16,7 @@ $(document).ready(function(){
         }
     }
     
+    /*
     $(".tmblr-full").each(function(){
         if(!$(this).parent().is(".npf_col")){
             if($(this).siblings(".tmblr-full").length){                
@@ -32,6 +33,29 @@ $(document).ready(function(){
             }
         }
     })
+    */
+    
+    // wrapping NPF photosets
+    $(".tmblr-full, .npf_row").each(function(){
+            if(!$(this).parent().is(".npf_col")){
+                if($(this).siblings(".tmblr-full, .npf_row").length){                
+                    $(this).not(".tmblr-full + .tmblr-full, .npf_row + .npf_row, .tmblr-full + .npf_row, .npf_row + .tmblr-full").each(function(){
+                        if(ver < "180"){
+                            $(this).nextUntil(":not(.tmblr-full, .npf_row)").andSelf().wrapAll('<div class="npf_inst">');
+                        } else {
+                            $(this).nextUntil(":not(.tmblr-full, .npf_row)").addBack().wrapAll('<div class="npf_inst">');
+                        }
+                    });
+                } else {
+                    // if .tmblr-full is by itself and is somehow not in a container
+                    $(this).wrap("<div class='npf_inst'>");
+                }
+            }
+        })
+
+    });
+
+    $("body").addClass("test");
     
     // old captions
     $("[post-type='text'] p:first-child + blockquote > .npf_inst:first-child").each(function(){
