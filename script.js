@@ -115,6 +115,7 @@ $(document).ready(function(){
     /*-----------------------------------------------*/
     
     // make images in rows even (beta)
+    setTimeout(function(){
     $(".npf_row .npf_col").each(function(){
         $(this).attr("genheight",$(this).height());
     });
@@ -129,6 +130,7 @@ $(document).ready(function(){
         
         $(this).children(".npf_col").height(shortest).removeAttr("genheight")
     });
+    },420);
     
     /*-----------------------------------------------*/
     
