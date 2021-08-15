@@ -3,6 +3,8 @@ $(document).ready(function(){
     var jqver = jQuery.fn.jquery;
     var ver = jqver.replaceAll(".","");
     
+    $(".npf_col").css("opacity","0")
+    
     // wrapping script courtesy of Nick Craver, my god and savior
     // stackoverflow.com/a/3329249/8144506
     
@@ -16,7 +18,7 @@ $(document).ready(function(){
         }
     }
     
-    /*
+    
     $(".tmblr-full").each(function(){
         if(!$(this).parent().is(".npf_col")){
             if($(this).siblings(".tmblr-full").length){                
@@ -33,27 +35,17 @@ $(document).ready(function(){
             }
         }
     })
-    */
     
-    // wrapping NPF photosets
-    $(".tmblr-full, .npf_row").each(function(){
-            if(!$(this).parent().is(".npf_col")){
-                if($(this).siblings(".tmblr-full, .npf_row").length){                
-                    $(this).not(".tmblr-full + .tmblr-full, .npf_row + .npf_row, .tmblr-full + .npf_row, .npf_row + .tmblr-full").each(function(){
-                        if(ver < "180"){
-                            $(this).nextUntil(":not(.tmblr-full, .npf_row)").andSelf().wrapAll('<div class="npf_inst">');
-                        } else {
-                            $(this).nextUntil(":not(.tmblr-full, .npf_row)").addBack().wrapAll('<div class="npf_inst">');
-                        }
-                    });
-                } else {
-                    // if .tmblr-full is by itself and is somehow not in a container
-                    $(this).wrap("<div class='npf_inst'>");
-                }
-            }
-        })
-
-    $("body").addClass("test");
+    $(".npf_inst + .npf_inst").each(function(){
+        $(this).appendTo($(this).prev(".npf_inst"));
+        $(this).children().unwrap();
+    })
+    
+    $(".npf_inst > .tmblr-full").each(function(){
+        $(this).wrap("<div class='npf_row'>")
+    })
+    
+    /*-----------------------------------------------*/
     
     // old captions
     $("[post-type='text'] p:first-child + blockquote > .npf_inst:first-child").each(function(){
@@ -138,20 +130,24 @@ $(document).ready(function(){
     
     // make images in rows even (beta)
     setTimeout(function(){
-    $(".npf_row .npf_col").each(function(){
-        $(this).attr("genheight",$(this).height());
-    });
-    
-    $(".npf_row").each(function(){
-        var que = $(this).find(".npf_col").map(function(){
-            return $(this).attr("genheight");
-        }).get();
+        $(".npf_row .npf_col").each(function(){
+            $(this).attr("genheight",$(this).height());
+        });
         
-        var shortest = Math.min.apply(Math,que);
-        $(this).attr("set-height",shortest);
-        
-        $(this).children(".npf_col").height(shortest).removeAttr("genheight")
-    });
+        $(".npf_row").each(function(){
+            if($(this).children(".npf_col").length){
+                var que = $(this).find(".npf_col").map(function(){
+                    return $(this).attr("genheight");
+                }).get();
+                
+                var shortest = Math.min.apply(Math,que);
+                $(this).attr("set-height",shortest);
+                
+                $(this).children(".npf_col").height(shortest).removeAttr("genheight");
+                
+                $(".npf_col").css("opacity","")
+            }
+        });
     },420);
     
     /*-----------------------------------------------*/
@@ -201,16 +197,17 @@ $(document).ready(function(){
             }
         })
         
+        
         // if post has a caption, relocate
         if($(this).next().length){
             $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
             $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
-            //$(this).parents("[post-type]").find(".source-head").css("margin-top","var(--NPF-Caption-Spacing)");
             
             if($(this).closest(".tumblr_parent").length){
                 $(this).insertBefore($(this).parent())
             }
         }
+        
     })
     
     /*-----------------------------------------------*/
