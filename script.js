@@ -127,7 +127,7 @@ $(document).ready(function(){
     })
     
     $(".npf_col .npf_row").each(function(){
-        $(this).unwrap();
+        $(this).children().unwrap();
     });
     
     /*-----------------------------------------------*/
