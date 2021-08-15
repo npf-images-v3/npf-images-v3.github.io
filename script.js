@@ -53,8 +53,6 @@ $(document).ready(function(){
             }
         })
 
-    });
-
     $("body").addClass("test");
     
     // old captions
