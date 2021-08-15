@@ -292,5 +292,47 @@ $(document).ready(function(){
             })
         })
     })
+    
+    /*-----------------------------------------------*/
+    
+    // double check if image heights have loaded correctly
+    $(window).load(function(){
+        $(".npf_col .tmblr-full").each(function(){
+            
+            var ogw = $(this).find(".post_media_photo_anchor")
+                      .attr("data-big-photo-width");
+            
+            var ogh = $(this).find(".post_media_photo_anchor")
+                      .attr("data-big-photo-height");
+            
+            var ogratio = ogh / ogw;
+            
+            var resheight = ($(this).width() * ogratio).toString();
+            resheight = resheight.substring(0,resheight.lastIndexOf("."));
+            
+            $(this).parent(".npf_col").attr("actualH",resheight);
+        })
+        
+        $(".npf_row").each(function(){
+            if($(this).children(".npf_col").length){
+                var cue = $(this).find(".npf_col").map(function(){
+                    return $(this).attr("actualH");
+                }).get();
+                
+                var moi = Math.min.apply(Math,cue);
+                
+                $(this).attr("check-height",moi)
+            }
+        });
+        
+        $("[actualh]").removeAttr("actualh");
+        
+        $("[set-height]").each(function(){
+            if($(this).height() < $(this).attr("check-height")){
+                $(this).addClass("jonas");
+                $(this).children(".npf_col").height($(this).attr("check-height"))
+            }
+        })
+    });
 
 })//end ready
