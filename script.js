@@ -126,6 +126,10 @@ $(document).ready(function(){
         $(this).parent(".npf_inst").addClass("photo-origin");
     })
     
+    $(".npf_col .npf_row").each(function(){
+        $(this).unwrap();
+    });
+    
     /*-----------------------------------------------*/
     
     // make images in rows even (beta)
