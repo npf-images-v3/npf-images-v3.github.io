@@ -1,7 +1,7 @@
 .npf_row {
     margin-left:0!important;
     margin-right:0!important;
-    display:flex;
+    display:flex!important;
 }
 
 /* i dont even know what crt-video is but it's apparently in the default t*mblr stylesheet so I will go ahead and unpoop that */
@@ -42,15 +42,15 @@ p + .npf_row {
 }
 
 .tmblr-full {
-    margin:0;
+    margin:0!important;
     padding-bottom:0!important;
 }
 
-.tmblr-full + .tmblr-full {
-    margin-top:var(--NPF-Image-Spacing);
+*:not(.npf_row) > .tmblr-full + .tmblr-full {
+    margin-top:var(--NPF-Image-Spacing)!important;
 }
 
-.post_media_photo {
+.post_media_photo, .tmblr-full img {
     position:initial!important;
     text-decoration:none;
 }
