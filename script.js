@@ -1,13 +1,92 @@
+/*---------------------------------------------------------
+
+    NPF images fix v3.0 by @glenthemes [2021]
+    💌 git.io/JRBt7
+    
+    Credits:
+    > wrap divs that are next to each other by Nick Craver
+      stackoverflow.com/a/3329249/8144506
+    > get 'deepest' element script by Balint Bako
+      stackoverflow.com/a/18652986/8144506
+    
+---------------------------------------------------------*/
+
 $(document).ready(function(){
     // check jquery version
     var jqver = jQuery.fn.jquery;
     var ver = jqver.replaceAll(".","");
     
-    $(".npf_col").css("opacity","0")
+    $(".npf_row .tmblr-full:not(:only-child)").each(function(){
+        $(this).wrap("<div class='npf_col'>")
+    })
     
-    // wrapping script courtesy of Nick Craver, my god and savior
-    // stackoverflow.com/a/3329249/8144506
+    /*-------------------------------------------------*/
     
+    $(".npf_col .tmblr-full [data-big-photo-height]").each(function(){
+        $(this).parents(".npf_col").attr("h",$(this).attr("data-big-photo-height"))
+    })
+    
+    $(".npf_col .tmblr-full [data-big-photo-width]").each(function(){
+        $(this).parents(".npf_col").attr("w",$(this).attr("data-big-photo-width"))
+    })
+    
+    $(".npf_col .tmblr-full img[data-orig-height]").each(function(){
+        $(this).parents(".npf_col").attr("h",$(this).attr("data-orig-height"))
+    })
+    
+    $(".npf_col .tmblr-full img[data-orig-width]").each(function(){
+        $(this).parents(".npf_col").attr("w",$(this).attr("data-orig-width"))
+    })
+    
+    /*-------------------------------------------------*/
+    
+    var spac = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--NPF-Image-Spacing"));
+    
+    $(".npf_row").each(function(){
+        if($(this).find(".npf_col").length){
+            // how many columns?
+            var cols = $(this).children(".npf_col").length;
+            $(this).attr("columns",cols);
+            
+            cols = Number(cols);
+            
+            // clarify the width of each column
+            var pognt = Math.floor(($(this).width() - (spac * (cols-1))) / cols);
+            $(this).children(".npf_col").attr("col-width",pognt)
+        }
+    })
+    
+    /*-------------------------------------------------*/
+    
+    // get the minified width & height values
+    $(".npf_col").each(function(){
+        var getratio = $(this).attr("w") / $(this).attr("h");
+        $(this).attr("ratio",getratio);
+        
+        var potato = $(this).attr("col-width") / Number(getratio);
+        potato = potato.toString();
+        potato = potato.substring(0,potato.lastIndexOf("."));
+        $(this).attr("col-height",potato);
+    })
+    
+    // get shortest column of that row
+    $(".npf_row").each(function(){
+        if($(this).find(".npf_col").length){
+            var quoi = $(this).children(".npf_col:not([col-height=''])").map(function(){
+                return $(this).attr("col-height");
+            }).get();
+            
+            var ngai = Math.min.apply(Math,quoi);
+            $(this).find(".tmblr-full").height(ngai);
+        }
+    });
+    
+    // remove the attributes bc they ugly
+    $(".npf_col").removeAttr("h w ratio")
+    
+    /*-------------------------------------------------*/
+    
+    // wrap .npf_rows that are next to each other
     var npf_row = $(".npf_row");
     
     for(var soda=0; soda<npf_row.length;){
@@ -18,230 +97,138 @@ $(document).ready(function(){
         }
     }
     
+    /*-------------------------------------------------*/
     
+    // multiple .tmblr-fulls that are next to each other,
+    // but are not in a row or container
+    // e.g. headers
+    $("*:not(.npf_row) > .tmblr-full").each(function(){
+        if($(this).siblings(".tmblr-full").length){                
+            $(this).not(".tmblr-full + .tmblr-full").each(function(){
+                if(ver < "180"){
+                    $(this).nextUntil(":not(.tmblr-full").andSelf().wrapAll('<div class="npf_inst">');
+                } else {
+                    $(this).nextUntil(":not(.tmblr-full").addBack().wrapAll('<div class="npf_inst">');
+                }
+            });
+        }
+    })
+    
+    // redo the .npf_inst wrapping
+    $(".npf_inst").each(function(){
+        $(this).not(".npf_inst + .npf_inst").each(function(){
+            if(ver < "180"){
+                $(this).nextUntil(":not(.npf_inst").andSelf().wrapAll('<div class="npf_inst">');
+                $(this).nextUntil(":not(.npf_inst").andSelf().children().unwrap();
+            } else {
+                $(this).nextUntil(":not(.npf_inst").addBack().wrapAll('<div class="npf_inst">');
+                $(this).nextUntil(":not(.npf_inst").addBack().children().unwrap();
+            }
+        });
+    })
+    
+    // wrap single containerless .tmblr-fulls
     $(".tmblr-full").each(function(){
-        if(!$(this).parent().is(".npf_col")){
-            if($(this).siblings(".tmblr-full").length){                
-                $(this).not(".tmblr-full + .tmblr-full").each(function(){
-                    if(ver < "180"){
-                        $(this).nextUntil(":not(.tmblr-full").andSelf().wrapAll('<div class="npf_inst">');
-                    } else {
-                        $(this).nextUntil(":not(.tmblr-full").addBack().wrapAll('<div class="npf_inst">');
+        if(!$(this).parents(".npf_inst").length){
+            if(!$(this).parents(".npf_row").length || !$(this).parents(".npf_col").length){
+                $(this).wrap("<div class='npf_inst'>")
+            }
+        }
+    })
+    
+    /*-------------------------------------------------*/
+    
+    // if: .tumblr_parent exists
+    $("[post-type='text']").each(function(){
+        $(this).find(".tumblr_parent").eq(0).each(function(){
+            $(this).find(".npf_inst").eq(0).each(function(){
+                if($.trim($(this).prev("p").text()) == ""){
+                    $(this).addClass("photo-origin");
+                    
+                    // relocate if there's a caption
+                    if($(this).next().length){
+                        $(this).insertBefore($(this).parents("[post-type='text']").find(".tumblr_parent").eq(0));
+                        $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
                     }
-                });
-            } else {
-                // if .tmblr-full is by itself and is somehow not in a container
-                $(this).wrap("<div class='npf_inst'>");
-            }
-        }
-    })
-    
-    $(".npf_inst + .npf_inst").each(function(){
-        $(this).appendTo($(this).prev(".npf_inst"));
-        $(this).children().unwrap();
-    })
-    
-    $(".npf_inst > .tmblr-full").each(function(){
-        $(this).wrap("<div class='npf_row'>")
-    })
-    
-    /*-----------------------------------------------*/
-    
-    // old captions
-    $("[post-type='text'] p:first-child + blockquote > .npf_inst:first-child").each(function(){
-        $(this).addClass("photo-origin capt-old");
-    });
-    
-    $(".capt-old").each(function(){
-        // target default generated source blog name/url
-        var jus = $(this).parent("blockquote").prev("p");
-        
-        if(jus.find("a.tumblr_blog")){
-            jus.addClass("utilisateur");
-            
-            if($(this).next().length){
-                // if it's the only npf of that post, relocate
-                if(!$(this).nextAll(".npf_inst").length){
-                    $(this).insertBefore($(this).parents("[post-type]").find(".utilisateur"))
                 }
-            } else {
-                jus.attr("contents",jus.text());
-                jus.attr("perma",jus.find("a.tumblr_blog").attr("href"));
-                
-                // remove ":" after username if there is one
-                if(jus.attr("contents").slice(-1) == ":"){
-                    jus.attr("contents",jus.text().substring(0,jus.text().lastIndexOf(":")))
-                }
-                
-                // remove blockquote
-                $(this).unwrap();
-                
-                // append source blog after the image
-                $(this).after("<p class='post-source'>(Source: <a href='" + jus.attr("perma") + "'>" + jus.attr("contents") + "</a>)</p>");
-                jus.remove();
-            }
-        }
+            })
+        });
     })
     
-    /*-----------------------------------------------*/
+    // if: .source-head exists
+    $("[post-type='text']").each(function(){
+        var postmain = this;
+        $(this).find(".source-head").eq(0).each(function(){
+            $(postmain).find(".npf_inst").eq(0).each(function(){
+                if($.trim($(this).prev("p").text()) == ""){
+                    $(this).addClass("photo-origin");
+                    
+                    // relocate if there's a caption
+                    if($(this).next().length){
+                        $(this).insertBefore($(this).parents("[post-type='text']").find(".source-head").eq(0));
+                        $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
+                    }
+                }
+            })
+        });
+    })
     
-    // new captions
+    // if: OLD BLOCKQUOTE CAPTIONS
     $("[post-type='text']").each(function(){
         $(this).find("p").eq(0).each(function(){
-            if($(this).next().is(".npf_inst")){
-                if($.trim($(this).text()) == ""){
-                    $(this).next().addClass("photo-origin");
-                    $(this).attr("empty-p","");
-                }
-            }
-        })
-    });
-    
-    // check if unnested captions
-    $(".tumblr_avatar + .tumblr_blog").each(function(){
-        $(this).add($(this).prev()).wrapAll("<div class='source-head'>")
-    })
-    
-    $(".source-head + .npf_inst").each(function(){
-        $(this).addClass("photo-origin")
-    })
-    
-    /*-----------------------------------------------*/
-    
-    // fallback if npf_row is somehow outside the container
-    $(".npf_row > .npf_inst").each(function(){
-        $(this).unwrap();
-        $(this).wrapInner("<div class='npf_row misery'>");
-    })
-    
-    $(".photo-origin > .npf_inst").each(function(){
-        $(this).unwrap()
-    })
-    
-    $(".npf_row.misery").each(function(){
-        if(!$(this).find(".npf_col").length){
-            $(this).children().wrap("<div class='npf_col'>")
-        }
-        
-        $(this).parent(".npf_inst").addClass("photo-origin");
-    })
-    
-    $(".npf_col .npf_row").each(function(){
-        $(this).children().unwrap();
-    });
-    
-    /*-----------------------------------------------*/
-    
-    // make images in rows even (beta)
-    setTimeout(function(){
-        $(".npf_row .npf_col").each(function(){
-            $(this).attr("genheight",$(this).height());
-        });
-        
-        $(".npf_row").each(function(){
-            if($(this).children(".npf_col").length){
-                var que = $(this).find(".npf_col").map(function(){
-                    return $(this).attr("genheight");
-                }).get();
-                
-                var shortest = Math.min.apply(Math,que);
-                $(this).attr("set-height",shortest);
-                
-                $(this).children(".npf_col").height(shortest).removeAttr("genheight");
-                
-                $(".npf_col").css("opacity","")
-            }
-        });
-    },420);
-    
-    /*-----------------------------------------------*/
-    
-    $(".photo-origin").each(function(){
-        // target source blog link
-        $(this).parents("[post-type='text']")
-        .find("a[href*='tumblr.com/post']")
-        .eq(0).each(function(){
-            $(this).addClass("source-blog");
-            
-            if(!$(this).parent().is("[post-type]")){
-                if(!$(this).siblings().length){
-                    $(this).parent().addClass("source-blog");
-                    $(this).removeClass("source-blog");
-                }
+            if($(this).find("a.tumblr_blog").length){
+                $(this).attr("last-comment","");
             }
         })
         
-        $(".source-blog").each(function(){
-            if($(this).prev().length){
-                // identify source blog avatar
-                if($(this).prev().is("img[src*='tumblr.com']")){
-                    $(this).prev().addClass("source-portrait");
-                }
+        var maxDepth = 0;
+        $(this).find("blockquote").each(function(){
+            $(this).attr('depth', $(this).parents().length);
+            if($(this).parents().length > maxDepth){
+                maxDepth = $(this).parents().length;
+            }
+        });
+        
+        $('[depth="' + maxDepth + '"]').addClass("op-blockquote");
+        $("blockquote[depth]").removeAttr("depth")
+    });
+    
+    $(".op-blockquote").each(function(){
+        if($(this).prev().is("p")){
+            if($(this).prev().find("a.tumblr_blog").length){
                 
-                if($(this).prev().find("img[src*='tumblr.com']")){
-                    $(this).prev().addClass("source-portrait");
-                }
+                var finst = $(this).children().first();
+                var poo = $(this).parents("[post-type='text']").find("[last-comment]").eq(0);
                 
-                if(!$(this).prev().prev().length){
-                    $(this).prev().addClass("source-portrait")
-                }
-                
-                // add or wrap ".source-head" class
-                if($(this).prev().is(".source-portrait")){
-                    if(!$(this).closest("[post-type]").length < 1){
-                        if(!$(this).next().length){
-                            $(this).parent().addClass("source-head")
+                if(finst.is(".npf_inst")){
+                    if(finst.next().length){
+                        finst.addClass("photo-origin");
+                        finst.insertBefore(poo);
+                        
+                        // attempt to fix fked up reblog order
+                        if(!$(this).prev().prev().is(".photo-origin")){
+                            $(this).add($(this).prev()).prependTo(poo.next("blockquote"))
                         }
                     }
-                    
-                    if($(this).next().length){
-                        $(this).add($(this).prev()).wrapAll("<div class='source-head'>")
-                    }
                 }
             }
-        })
-        
-        
-        // if post has a caption, relocate
-        if($(this).next().length){
-            $(this).insertBefore($(this).parents("[post-type]").find(".source-head"));
-            $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
-            
-            if($(this).closest(".tumblr_parent").length){
-                $(this).insertBefore($(this).parent())
-            }
         }
-        
     })
     
-    /*-----------------------------------------------*/
-    
-    // wrap single npf images in <a>
-    $(".tmblr-full[data-orig-height]").each(function(){
-        if(!$(this).find("a.post_media_photo_anchor").length){
-            var imgurl = $(this).find("img").attr("src");
-            $(this).find("img").wrap("<a class='post_media_photo_anchor' data-big-photo='" + imgurl + "' data-big-photo-height='" + $(this).attr("data-orig-height") + "' data-big-photo-width='" + $(this).attr("data-orig-width") + "'></a>");
-            $(this).find("img").addClass("post_media_photo t-solo image");
-            $(this).find("img").removeAttr("data-orig-height data-orig-width width height")
-        }
-        
-    })
+    /*-------------------------------------------------*/
     
     // initiate lightbox on images that didn't originally
     // come with photo anchor
-    $(".t-solo").click(function(){	
-        var imgsrc = $(this).attr("src");
-        
-        Tumblr.Lightbox.init([{
-            low_res:imgsrc,
-            high_res:imgsrc
-        }]);
+    $(".tmblr-full img").click(function(){
+        if(!$(this).hasClass("post_media_photo")){
+            var imgsrc = $(this).attr("src");
+            
+            Tumblr.Lightbox.init([{
+                low_res:imgsrc,
+                high_res:imgsrc
+            }]);
+        }
     });
-    
-    // make npf images HD
-    $(".post_media_photo_anchor").each(function(){
-        $(this).find("img").attr("src",$(this).attr("data-big-photo"))
-    })
     
     // assign unique ID to each NPF photoset
     $(".npf_inst").each(function(){
@@ -292,47 +279,4 @@ $(document).ready(function(){
             })
         })
     })
-    
-    /*-----------------------------------------------*/
-    
-    // double check if image heights have loaded correctly
-    $(window).load(function(){
-        $(".npf_col .tmblr-full").each(function(){
-            
-            var ogw = $(this).find(".post_media_photo_anchor")
-                      .attr("data-big-photo-width");
-            
-            var ogh = $(this).find(".post_media_photo_anchor")
-                      .attr("data-big-photo-height");
-            
-            var ogratio = ogh / ogw;
-            
-            var resheight = ($(this).width() * ogratio).toString();
-            resheight = resheight.substring(0,resheight.lastIndexOf("."));
-            
-            $(this).parent(".npf_col").attr("actualH",resheight);
-        })
-        
-        $(".npf_row").each(function(){
-            if($(this).children(".npf_col").length){
-                var cue = $(this).find(".npf_col").map(function(){
-                    return $(this).attr("actualH");
-                }).get();
-                
-                var moi = Math.min.apply(Math,cue);
-                
-                $(this).attr("check-height",moi)
-            }
-        });
-        
-        $("[actualh]").removeAttr("actualh");
-        
-        $("[set-height]").each(function(){
-            if($(this).height() < $(this).attr("check-height")){
-                $(this).addClass("jonas");
-                $(this).children(".npf_col").height($(this).attr("check-height"))
-            }
-        })
-    });
-
-})//end ready
+});// end ready
