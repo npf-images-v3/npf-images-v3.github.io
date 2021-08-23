@@ -61,7 +61,22 @@ p + .npf_row {
     vertical-align:middle;
 }
 
+/*
 .photo-origin .tmblr-full img {
+    width:100%;
+}
+*/
+
+.npf_inst > * {
+    margin-top:0!important;
+    margin-bottom:var(--NPF-Image-Spacing)!important;
+}
+
+.npf_inst > *:last-child {
+    margin-bottom:0!important;
+}
+
+.npf_inst > .tmblr-full img {
     width:100%;
 }
 
