@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2021/08/15 05:14PM GMT+8
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2021/08/24 05:02AM GMT+8
 
 #### What is NPF?
 > NPF stands for "Neue Post Format". Tumblr used to have multiple types of post formats to choose from (namingly text, photo, quote, link, chat, video, questions), but in recent years they've started to turn many of those formats into NPF only (in other words, **everything becomes a text post**). This means that all images uploaded via Tumblr mobile have turned into **NPF images**. NPF images can also refer to images between paragraphs.
@@ -51,52 +51,18 @@
     }
     </style>
     ```
-    **Note:** if you're using [unnested captions](https://codepen.io/neothm/pen/PzVjRy) by neothm & magnusthemes, please make sure that my scripts are AFTER the unnest script! (Also, do not change the names of `.tumblr_parent` and .`tumblr_avatar`!)
+    **Note:** if you're using [unnested captions](https://codepen.io/neothm/pen/PzVjRy) by neothm & magnusthemes, please make sure that my scripts are AFTER the unnest script! (Also, do not change the name of `.tumblr_parent`!)
     
 ---
     
 #### Potential Problems:
 If you're using the old dashboard captions, everything *should* run as intended.  
   
-However if you're using modern dashboard captions, depending on your theme, the html structure of the user icon & blog link may vary, and so the main photo could still be stuck under it. If you're fine with this, cool! But if you're picky like me, you can manually assign to trigger the rearranging.
-*   Add classes `tumblr_avatar` and `tumblr_blog` accordingly:  
-    (**must** be done within `{block:Text}`).  
-    **Example 1:**
-    ```html
-    {block:Text}
-    ...
-    {block:RebloggedFrom}
-    {block:Reblogs}
-    
-    <img src="{PortraitURL-64}" class="tumblr_avatar">
-    <a class="tumblr_blog" href="{Permalink}">{Username}</a>
-    
-    {/block:Reblogs}
-    {/block:RebloggedFrom}
-    {/block:Text}
-    ```
-    
-    **Example 2:**
-    ```html
-    {block:Text}
-    ...
-    {block:RebloggedFrom}
-    {block:Reblogs}
-    
-    <div class="avatar-container tumblr_avatar">
-        <img src="{PortraitURL-64}">
-    </div>
+However if you're using modern dashboard captions, depending on your theme, the html structure of the user icon & blog link may vary, and so the main photo could still be stuck under it. If you're fine with this, cool! But if you're picky like me, you can manually assign to trigger the rearranging.  
 
-    <div class="username-container tumblr_blog">
-        <a href="{Permalink}">{Username}</a>
-    </div>
-    
-    {/block:Reblogs}
-    {/block:RebloggedFrom}
-    {/block:Text}
-    ```
-*   If the `avatar` and `username` are already wrapped nicely in a `div` but somehow it wasn't detected, add `source-head` class to the wrapper!  
-    In this scenario, you don't need to worry about assigning `tumblr_avatar` and `tumblr_blog`. 💗
+Within `{block:Text}`, you should find an element for the reblogger image, as well as the name of that user. Add `source-head` class to the wrapper!  
+
+*   **Example 1:**
     ```html
     {block:Text}
     ...
@@ -106,6 +72,27 @@ However if you're using modern dashboard captions, depending on your theme, the 
     <div class="some-wrapper source-head">
         <img src="{PortraitURL-64}">
         <a href="{Permalink}">{Username}</a>
+    </div>
+    
+    {/block:Reblogs}
+    {/block:RebloggedFrom}
+    {/block:Text}
+    ```
+*   **Example 2 – more complex structure:**
+    ```html
+    {block:Text}
+    ...
+    {block:RebloggedFrom}
+    {block:Reblogs}
+    
+    <div class="some-wrapper source-head">
+        <div class="avatar-image-container">
+            <img src="{PortraitURL-64}">
+        </div>
+        
+        <span class="reblogger-username">
+            <a href="{Permalink}">{Username}</a>
+        </span>
     </div>
     
     {/block:Reblogs}
