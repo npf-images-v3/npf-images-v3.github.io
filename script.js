@@ -157,6 +157,7 @@ $(document).ready(function(){
     
     // if: avatar img + username
     // add .source-head
+    /*
     $("[post-type='text']").each(function(){
         if(!$(this).find(".source-head").length){
             $(this).find("img").eq(0).each(function(){
@@ -166,6 +167,7 @@ $(document).ready(function(){
             });
         }
     })
+    */
     
     // if: .source-head already exists
     $("[post-type='text']").each(function(){
