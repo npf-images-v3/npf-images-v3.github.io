@@ -158,11 +158,13 @@ $(document).ready(function(){
     // if: avatar img + username
     // add .source-head
     $("[post-type='text']").each(function(){
-        $(this).find("img").eq(0).each(function(){
-            if($(this).next("a").attr("href").indexOf(".tumblr.com/post") > -1){
-                $(this).add($(this).next()).wrapAll("<div class='source-head'>");
-            }
-        });
+        if(!$(this).find(".source-head").length){
+            $(this).find("img").eq(0).each(function(){
+                if($(this).next("a").attr("href").indexOf(".tumblr.com/post") > -1){
+                    $(this).add($(this).next()).wrapAll("<div class='source-head'>");
+                }
+            });
+        }
     })
     
     // if: .source-head already exists
