@@ -155,7 +155,17 @@ $(document).ready(function(){
         });
     })
     
-    // if: .source-head exists
+    // if: avatar img + username
+    // add .source-head
+    $("[post-type='text']").each(function(){
+        $(this).find("img").eq(0).each(function(){
+            if($(this).next("a").attr("href").indexOf(".tumblr.com/post") > -1){
+                $(this).add($(this).next()).wrapAll("<div class='source-head'>");
+            }
+        });
+    })
+    
+    // if: .source-head already exists
     $("[post-type='text']").each(function(){
         var postmain = this;
         $(this).find(".source-head").eq(0).each(function(){
