@@ -157,17 +157,17 @@ $(document).ready(function(){
     
     // if: avatar img + username
     // add .source-head
-    /*
     $("[post-type='text']").each(function(){
         if(!$(this).find(".source-head").length){
             $(this).find("img").eq(0).each(function(){
-                if($(this).next("a").attr("href").indexOf(".tumblr.com/post") > -1){
-                    $(this).add($(this).next()).wrapAll("<div class='source-head'>");
+                if($(this).next("a").length){
+                    if($(this).next("a").attr("href").indexOf(".tumblr.com/post") > -1){
+                        $(this).add($(this).next()).wrapAll("<div class='source-head'>");
+                    }
                 }
             });
         }
     })
-    */
     
     // if: .source-head already exists
     $("[post-type='text']").each(function(){
@@ -221,7 +221,9 @@ $(document).ready(function(){
                         
                         // attempt to fix fked up reblog order
                         if(!$(this).prev().prev().is(".photo-origin")){
-                            $(this).add($(this).prev()).prependTo(poo.next("blockquote"))
+                            if(poo.next().is("blockquote")){
+                                $(this).add($(this).prev()).prependTo(poo.next("blockquote"))
+                            }
                         }
                     }
                 }
