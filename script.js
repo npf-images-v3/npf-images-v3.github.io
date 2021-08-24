@@ -218,6 +218,9 @@ $(document).ready(function(){
                     if(finst.next().length){
                         finst.addClass("photo-origin");
                         finst.insertBefore(poo);
+                        if(finst.next().is("p")){
+                            finst.css("margin-bottom","var(--NPF-Caption-Spacing)");
+                        }
                         
                         // attempt to fix fked up reblog order
                         if(!$(this).prev().prev().is(".photo-origin")){
