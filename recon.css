@@ -78,6 +78,7 @@ p + .npf_row {
 
 .npf_inst > .tmblr-full img {
     width:100%;
+    height:auto;
 }
 
 .lb-cont {
