@@ -155,22 +155,26 @@ $(document).ready(function(){
         });
     })
     
-    // .source-head do the thing
+    // .source-head do the thing - attempt #2
+    // yes there was an attempt #1 but it was too embarrassing
     $("[post-type='text']").each(function(){
-        var postmain = this;
-        $(this).find(".source-head").eq(0).each(function(){
-            $(postmain).find(".npf_inst").eq(0).each(function(){
-                if($.trim($(this).prev("p").text()) == ""){
-                    $(this).addClass("photo-origin");
-                    
-                    // relocate if there's a caption
-                    if($(this).next().length){
-                        $(this).insertBefore($(this).parents("[post-type='text']").find(".source-head").eq(0));
-                        $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
+        // target first commenter
+        var behead = $(this).find(".source-head").parent();
+        behead = behead.eq(0);
+        
+        if(behead.find(".npf_inst").length){
+            var nuf = $(this).find(".npf_inst").eq(0);
+            if(nuf.prev().length){
+                if($.trim(nuf.prev().text()) == ""){
+                    if(nuf.next().length){
+                        nuf.addClass("photo-origin");
+                        nuf.insertBefore(behead.children(".source-head"));
+                        nuf.css("margin-bottom","var(--NPF-Caption-Spacing)")
                     }
                 }
-            })
-        });
+                
+            }
+        }
     })
     
     // if: OLD BLOCKQUOTE CAPTIONS
