@@ -59,6 +59,8 @@ p + .npf_row {
     position:initial!important;
     cursor:pointer;
     vertical-align:middle;
+    max-width:100%;
+    height:auto;
 }
 
 /*
