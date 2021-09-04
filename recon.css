@@ -78,7 +78,7 @@ p + .npf_row {
     margin-bottom:0!important;
 }
 
-[post-type='text'] .tmblr-full img .npf_inst > .tmblr-full img {
+[post-type='text'] .npf_inst > .tmblr-full img {
     width:100%;
     height:auto;
 }
