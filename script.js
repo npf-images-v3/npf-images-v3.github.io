@@ -218,6 +218,16 @@ $(document).ready(function(){
                                 $(this).add($(this).prev()).prependTo(poo.next("blockquote"))
                             }
                         }
+                    } else {
+                        // if npf does not have caption text
+                        var gp = $(this).prev("p").find("a.tumblr_blog");
+                        var gp_name = gp.text();
+                        var gp_url = gp.attr("href");
+                        finst.addClass("photo-origin");
+                        finst.insertBefore(poo);
+                        poo.next(".op-blockquote").remove();
+                        poo.remove();
+                        finst.after("<p class='npf-post-source'>(Source: <a href='" + gp_url + "'>" + gp_name + "</a>)</p>")
                     }
                 }
             }
