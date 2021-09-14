@@ -56,7 +56,7 @@ p + .npf_row {
 }
 
 .post_media_photo {
-    height:initial!important;
+    height:auto!important;
 }
 
 .tmblr-full img {
