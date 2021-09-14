@@ -55,6 +55,10 @@ p + .npf_row {
     text-decoration:none;
 }
 
+.post_media_photo {
+    height:initial!important;
+}
+
 .tmblr-full img {
     position:initial!important;
     cursor:pointer;
