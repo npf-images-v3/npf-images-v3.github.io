@@ -57,6 +57,7 @@ p + .npf_row {
 
 .post_media_photo_anchor {
     height:auto!important;
+    width:inherit;
 }
 
 .tmblr-full img {
