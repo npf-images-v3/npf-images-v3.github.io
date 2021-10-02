@@ -19,6 +19,7 @@ p + .npf_row {
 
 .npf_col {
     padding:0!important;
+    flex:1;
 }
 
 /* npf-col 1st */
