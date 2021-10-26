@@ -177,6 +177,19 @@ $(document).ready(function(){
         }
     })
     
+    // catch any stray npfs that were meant to be included in set
+    $("[post-type='text']:has(.photo-origin)").each(function(){
+        var that = this;
+        $(this).find("p + .npf_inst").each(function(){
+            if($.trim($(this).prev("p").text()) == ""){
+                if($(this).next().length){
+                    $(this).addClass('recall')
+                    $(this).appendTo($(that).find(".photo-origin"))
+                }
+            }
+        })
+    })
+    
     // if: OLD BLOCKQUOTE CAPTIONS
     $("[post-type='text']").each(function(){
         $(this).find("p").eq(0).each(function(){
