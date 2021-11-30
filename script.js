@@ -311,4 +311,12 @@ $(document).ready(function(){
             })
         })
     })
+    
+    /*-------------------------------------------------*/
+    
+    $("[data-big-photo]").each(function(){
+        var gwgw = $(this).attr("data-big-photo");
+        var guppy = new Image();
+        guppy.src = gwgw;
+    })
 });// end ready
