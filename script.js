@@ -260,6 +260,8 @@ $(document).ready(function(){
                 high_res:imgsrc
             }]);
         }
+        
+        $(".lightbox-image-container").addClass("npf-lightbox");
     });
     
     // assign unique ID to each NPF photoset
