@@ -101,13 +101,3 @@ p + .npf_row {
     max-width:80vw;
     max-height:80vh;
 }
-
-.lightbox-image[width]{
-    width:initial!important;
-    max-width:80vw;
-}
-
-.lightbox-image[height]{
-    height:initial!important;
-    max-height:80vh;
-}
