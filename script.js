@@ -288,8 +288,6 @@ $(document).ready(function(){
         var npfmax = $(this).parents(".npf_inst")
                      .find(".tmblr-full").length;
         
-        $(".lightbox-image-container").addClass("npf-lightbox");
-        
         $(document).on("click", ".lightbox-image", function(){
             $(this).attr("npf-id",npfID).attr("order",npford);
             
