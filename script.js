@@ -260,8 +260,6 @@ $(document).ready(function(){
                 high_res:imgsrc
             }]);
         }
-        
-        $(".lightbox-image-container").addClass("npf-lightbox");
     });
     
     // assign unique ID to each NPF photoset
@@ -289,6 +287,8 @@ $(document).ready(function(){
         var npford = $(this).parents(".tmblr-full").attr("list-order");
         var npfmax = $(this).parents(".npf_inst")
                      .find(".tmblr-full").length;
+        
+        $(".lightbox-image-container").addClass("npf-lightbox");
         
         $(document).on("click", ".lightbox-image", function(){
             $(this).attr("npf-id",npfID).attr("order",npford);
