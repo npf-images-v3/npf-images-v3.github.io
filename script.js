@@ -269,17 +269,21 @@ $(document).ready(function(){
     
     // initialize number of images in each NPF photoset,
     // and create an numerically labelled list
-    $(".npf_inst").each(function(){
-        $(this).find(".tmblr-full").each(function(i){
-            i = i + 1;
-            $(this).attr("list-order",i);
-        });
-        
-        $(this).find(".tmblr-full img").each(function(w){
-            w = w + 1;
-            $(this).parents(".npf_inst").attr("image" + w,$(this).attr("src"))
-        });
-    })
+    function npflineup(){
+        $(".npf_inst").each(function(){
+            $(this).find(".tmblr-full").each(function(i){
+                i = i + 1;
+                $(this).attr("list-order",i);
+            });
+
+            $(this).find(".tmblr-full img").each(function(w){
+                w = w + 1;
+                $(this).parents(".npf_inst").attr("image" + w,$(this).attr("src"))
+            });
+        })
+    }
+    
+    npflineup();
     
     // initialize lightbox + clickthrough
     $(".tmblr-full img").click(function(){
@@ -311,6 +315,17 @@ $(document).ready(function(){
             })
         })
     })
+    
+    // do that thing again if npfs are inside npfs fsfr
+    $(".npf_inst .npf_inst").each(function(){
+        $(this).children().unwrap();
+    })
+    
+    $(".npf_inst [list-order]").each(function(){
+        $(this).removeAttr("list-order");
+    })
+    
+    npflineup();
     
     /*-------------------------------------------------*/
     
