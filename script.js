@@ -321,6 +321,11 @@ $(document).ready(function(){
         $(this).children().unwrap();
     })
     
+    $(".npf_inst + .npf_inst").each(function(){
+        $(this).appendTo($(this).prev());
+        $(this).children().unwrap();
+    });
+    
     $(".npf_inst [list-order]").each(function(){
         $(this).removeAttr("list-order");
     })
