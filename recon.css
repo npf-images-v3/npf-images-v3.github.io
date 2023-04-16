@@ -2,6 +2,7 @@
     margin-left:0!important;
     margin-right:0!important;
     display:flex!important;
+    align-items:stretch!important;
 }
 
 /* i dont even know what crt-video is but it's apparently in the default t*mblr stylesheet so I will go ahead and unpoop that */
@@ -57,6 +58,8 @@ p + .npf_row {
 }
 
 .post_media_photo_anchor {
+    padding:0;
+    border:none;
     height:auto!important;
     width:inherit;
 }
@@ -67,6 +70,7 @@ p + .npf_row {
     vertical-align:middle;
     max-width:100%;
     height:auto;
+    object-fit:cover;
 }
 
 /*
