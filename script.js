@@ -17,7 +17,9 @@ $(document).ready(function(){
     var ver = jqver.replaceAll(".","");
     
     $(".npf_row .tmblr-full:not(:only-child)").each(function(){
-        $(this).wrap("<div class='npf_col'>")
+        if(!$(this).parent().is(".npf_col")){
+            $(this).wrap("<div class='npf_col'>")
+        }        
     })
     
     /*-------------------------------------------------*/
@@ -180,7 +182,10 @@ $(document).ready(function(){
     // catch any stray npfs that were meant to be included in set
     $("[post-type='text']:has(.photo-origin)").each(function(){
         var that = this;
-        $(this).find("p + .npf_inst").each(function(){
+        // was "p + .npf_inst"
+        // changed it to "* + p + .npf_inst" bc:
+        // images that are NOT next to each other were being grouped
+        $(this).find("* + p + .npf_inst").each(function(){
             if($.trim($(this).prev("p").text()) == ""){
                 if($(this).next().length){
                     $(this).addClass('recall')
