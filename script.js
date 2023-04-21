@@ -267,60 +267,6 @@ $(document).ready(function(){
         }
     });
     
-    // assign unique ID to each NPF photoset
-    $(".npf_inst").each(function(){
-        $(this).attr("npf-id","npf_" + Math.random().toString(36).substr(2, 5))
-    });
-    
-    // initialize number of images in each NPF photoset,
-    // and create an numerically labelled list
-    function npflineup(){
-        $(".npf_inst").each(function(){
-            $(this).find(".tmblr-full").each(function(i){
-                i = i + 1;
-                $(this).attr("list-order",i);
-            });
-
-            $(this).find(".tmblr-full img").each(function(w){
-                w = w + 1;
-                $(this).parents(".npf_inst").attr("image" + w,$(this).attr("src"))
-            });
-        })
-    }
-    
-    npflineup();
-    
-    // initialize lightbox + clickthrough
-    $(".tmblr-full img").click(function(){
-        var npfID = $(this).parents("[npf-id]").attr("npf-id");
-        var npford = $(this).parents(".tmblr-full").attr("list-order");
-        var npfmax = $(this).parents(".npf_inst")
-                     .find(".tmblr-full").length;
-        
-        $(document).on("click", ".lightbox-image", function(){
-            $(this).attr("npf-id",npfID).attr("order",npford);
-            
-            $(".npf_inst").each(function(){
-                if($(this).attr("npf-id") == $(".lightbox-image").attr("npf-id")){
-                    
-                    npford = Number(npford)+1;
-                    
-                    if($(this).is("[image" + npford + "]")){
-                        var getnext = $(this).attr("image" + npford);
-                        $(".lightbox-image").attr("src",getnext);
-                        
-                        $(".lightbox-image").addClass("lb-img");
-                        $(".lightbox-image-container").addClass("lb-cont");
-                    } else {
-                        if($(".lightbox-image").attr("order") > npfmax){
-                            $(".lightbox-image").removeAttr("order");
-                        }
-                    }
-                }
-            })
-        })
-    })
-    
     // do that thing again if npfs are inside npfs fsfr
     $(".npf_inst .npf_inst").each(function(){
         $(this).children().unwrap();
@@ -335,8 +281,6 @@ $(document).ready(function(){
         $(this).removeAttr("list-order");
     })
     
-    npflineup();
-    
     /*-------------------------------------------------*/
     
     $("[data-big-photo]").each(function(){
@@ -345,3 +289,13 @@ $(document).ready(function(){
         guppy.src = gwgw;
     })
 });// end ready
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("https://static.tumblr.com/gtjt4bo/jvhrtg8bu/quick_tumblr_lightbox.js")
+  .then(response => response.text())
+  .then(getContents => {
+      let makeScript = document.createElement("script");
+      makeScript.textContent = getContents + "\n" + `quick_tumblr_lightbox(".npf_inst")`;
+      document.body.appendChild(makeScript)
+  });
+})
