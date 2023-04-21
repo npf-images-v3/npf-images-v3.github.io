@@ -291,7 +291,7 @@ $(document).ready(function(){
 });// end ready
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("https://static.tumblr.com/gtjt4bo/jvhrtg8bu/quick_tumblr_lightbox.js")
+  fetch("https://static.tumblr.com/gtjt4bo/tF6rtg9ra/quick_tumblr_lightbox.js")
   .then(response => response.text())
   .then(getContents => {
       let makeScript = document.createElement("script");
