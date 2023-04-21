@@ -110,5 +110,8 @@ Within `{block:Text}`, you should find an element for the reblogger image, as we
 * copy your full theme code into [ghostbin.com](https://ghostbin.com) - no title or password required - hit save, then send me the link!
 
 ---
-If this helped you, I'm happy! Please consider reblogging [the post](https://glenthemes.tumblr.com/post/659034084446748672/npf-images-v3) so more people hear about this!  
-🌟 HT | glenthemes
+
+If you made it this far, thank you!  
+Please consider reblogging [the post](https://glenthemes.tumblr.com/post/659034084446748672/npf-images-v3), or [send me a donation](https://ko-fi.com/glenthemes)! It helps me out a lot.  
+
+🌟 HT ⋆ glenthemes
