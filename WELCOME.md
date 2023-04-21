@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/04/15 21:22 GMT-7
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/04/20 22:06 GMT-7
 
 #### What is NPF?
 > NPF stands for "Neue Post Format". Tumblr used to have multiple types of post formats to choose from (namingly text, photo, quote, link, chat, video, questions), but in recent years they've started to turn many of those formats into NPF only (in other words, **everything becomes a text post**). This means that all images uploaded via Tumblr mobile have turned into **NPF images**. NPF images can also refer to images between paragraphs.
@@ -17,7 +17,8 @@
 - [x] stops images from being squashed (default height is apparently 75%. WHO thought this was a good idea?!)
 - [x] custom spacing between images
 - [x] custom spacing between images and captions
-- [x] lightbox support (currently only works with mouse clicks, not arrow keys)
+- [x] ![new___by_kittyrocker_d92ktsr](https://user-images.githubusercontent.com/88550643/233545907-ff557354-f080-4040-adf0-f3ffe7fce86c.gif) lightbox support &mdash; now functions like traditional photoset lightboxes!
+
 - [x] repositions main image to top of post if they were meant to look like photo posts (e.g. for artists)
 - [x] removes the blockquote border on the main image
 
