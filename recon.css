@@ -43,6 +43,11 @@ p + .npf_row {
     padding:0!important;
 }
 
+/* maximize height of .npf_col images */
+.npf_col img {
+    height:100%!important;
+}
+
 .tmblr-full {
     margin:0!important;
     padding-bottom:0!important;
