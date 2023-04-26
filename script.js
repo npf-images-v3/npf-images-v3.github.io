@@ -291,6 +291,7 @@ $(document).ready(function(){
 });// end ready
 
 document.addEventListener("DOMContentLoaded", () => {
+  // lightbox functionality
   fetch("https://static.tumblr.com/gtjt4bo/tF6rtg9ra/quick_tumblr_lightbox.js")
   .then(response => response.text())
   .then(getContents => {
@@ -298,4 +299,19 @@ document.addEventListener("DOMContentLoaded", () => {
       makeScript.textContent = getContents + "\n" + `quick_tumblr_lightbox(".npf_inst")`;
       document.body.appendChild(makeScript)
   });
+    
+  // target stray NPFs that are supposed to be .photo-origin
+  // ideally: old blockquote captions
+  let targetStrayNPF = "[post-type='text'] blockquote:not(.op-blockquote) > .npf_inst:first-child";
+  document.querySelectorAll(targetStrayNPF).forEach(tsNPF => {
+      let elp = tsNPF.parentNode.previousElementSibling;
+      if(elp.matches("p[last-comment]")){
+          if(elp.querySelector("a.tumblr_blog")){
+              if(!elp.previousElementSibling){
+                  elp.parentNode.prepend(tsNPF);
+                  tsNPF.classList.add("photo-origin")
+              }
+          }
+      }
+  })
 })
