@@ -44,7 +44,7 @@ p + .npf_row {
 }
 
 /* maximize height of .npf_col images */
-.npf_col img {
+[post-type="text"] .npf_col img {
     height:100%!important;
 }
 
