@@ -302,8 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
   // target stray NPFs that are supposed to be .photo-origin
   // ideally: old blockquote captions
-  let targetStrayNPF = "[post-type='text'] blockquote:not(.op-blockquote) > .npf_inst:first-child";
-  document.querySelectorAll(targetStrayNPF).forEach(tsNPF => {
+  let targetStrayNPF = document.querySelectorAll("[post-type='text'] blockquote:not(.op-blockquote) > .npf_inst:first-child");
+  targetStrayNPF ? targetStrayNPF.forEach(tsNPF => {
       let elp = tsNPF.parentNode.previousElementSibling;
       if(elp.matches("p[last-comment]")){
           if(elp.querySelector("a.tumblr_blog")){
@@ -313,5 +313,5 @@ document.addEventListener("DOMContentLoaded", () => {
               }
           }
       }
-  })
+  }) : ""
 })
