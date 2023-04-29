@@ -292,7 +292,7 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", () => {
   // lightbox functionality
-  fetch("https://static.tumblr.com/gtjt4bo/tF6rtg9ra/quick_tumblr_lightbox.js")
+  fetch("https://static.tumblr.com/gtjt4bo/7Z5rtw3xh/quick_tumblr_lightbox.js")
   .then(response => response.text())
   .then(getContents => {
       let makeScript = document.createElement("script");
