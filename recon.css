@@ -13,6 +13,11 @@ p + .npf_row {
     margin-top:var(--NPF-Caption-Spacing)!important;
 }
 
+/* stray single npf not wrapped in a .npf_row */
+.tmblr-full + .npf_row {
+    margin-top:var(--NPF-Image-Spacing);
+}
+
 .npf_row + .npf_row,
 .npf_row + .tmblr-full {
     margin-top:var(--NPF-Image-Spacing)!important;
