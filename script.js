@@ -22,6 +22,14 @@ $(document).ready(function(){
         }        
     })
     
+    // wrap any stray .tmblr-full in row container
+    $(".tmblr-full + .npf_row").each(function(){
+        let uw = $(this).prev();
+        if(!uw.parent().is(".npf_row")){
+            uw.wrap("<div class='npf_row' columns='1'>")
+        }
+    })
+    
     /*-------------------------------------------------*/
     
     $(".npf_col .tmblr-full [data-big-photo-height]").each(function(){
