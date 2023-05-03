@@ -15,7 +15,7 @@ p + .npf_row {
 
 /* stray single npf not wrapped in a .npf_row */
 .tmblr-full + .npf_row {
-    margin-top:var(--NPF-Image-Spacing);
+    margin-top:var(--NPF-Image-Spacing)!important;
 }
 
 .npf_row + .npf_row,
