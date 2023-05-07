@@ -72,6 +72,10 @@ p + .npf_row {
     border:none;
     height:auto!important;
     width:inherit;
+}
+
+.post_media_photo_anchor, .tmblr-full img,
+.tmblr-full video, .tmblr-full audio[controls]{
     line-height:0;
 }
 
