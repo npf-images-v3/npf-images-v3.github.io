@@ -8,6 +8,8 @@
       stackoverflow.com/a/3329249/8144506
     > get 'deepest' element script by Balint Bako
       stackoverflow.com/a/18652986/8144506
+
+    Last updated: 2023-06-20
     
 ---------------------------------------------------------*/
 
@@ -159,11 +161,15 @@ $(document).ready(function(){
                     if($(this).next().length){
                         $(this).insertBefore($(this).parents("[post-type='text']").find(".tumblr_parent").eq(0));
                         $(this).css("margin-bottom","var(--NPF-Caption-Spacing)")
+                    } else {
+                        $(this).addClass("npf-no-caption");
                     }
                 }
             })
         });
     })
+  
+    /*-------------------------------------------------*/
     
     // .source-head do the thing - attempt #2
     // yes there was an attempt #1 but it was too embarrassing
@@ -180,6 +186,8 @@ $(document).ready(function(){
                         nuf.addClass("photo-origin");
                         nuf.insertBefore(behead.children(".source-head"));
                         nuf.css("margin-bottom","var(--NPF-Caption-Spacing)")
+                    } else {
+                        nuf.addClass("npf-no-caption")
                     }
                 }
                 
@@ -250,6 +258,7 @@ $(document).ready(function(){
                         var gp_name = gp.text();
                         var gp_url = gp.attr("href");
                         finst.addClass("photo-origin");
+                        finst.addClass("npf-no-caption");
                         finst.insertBefore(poo);
                         poo.next(".op-blockquote").remove();
                         poo.remove();
