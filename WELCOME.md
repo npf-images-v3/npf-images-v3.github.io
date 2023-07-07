@@ -1,6 +1,15 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/04/25 20:30 GMT-7
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/07/07 11:01 GMT-7
+
+#### Table of Contents:
+- [What is NPF?](#what-is-npf)
+- [Features](#features)
+- [How to install](#how-to-install)
+- [Potential problems](#potential-problems)
+- [Further support](#further-support)
+
+---
 
 #### What is NPF?
 > NPF stands for "Neue Post Format". Tumblr used to have multiple types of post formats to choose from (namingly text, photo, quote, link, chat, video, questions), but in recent years they've started to turn many of those formats into NPF only (in other words, **everything becomes a text post**). This means that all images uploaded via Tumblr mobile have turned into **NPF images**. NPF images can also refer to images between paragraphs.
@@ -39,6 +48,8 @@
 
 4.  Paste the following **after** the jQuery line:  
     ```html
+    <link rel="stylesheet" media="screen" href="//assets.tumblr.com/client/prod/standalone/blog-network-npf/index.build.css">
+    
     <!--
             NPF images fix v3.0 by @glenthemes [2021]
             💌 git.io/JRBt7
@@ -51,19 +62,18 @@
         --NPF-Image-Spacing:4px;
     }
     </style>
-
-    <link rel="stylesheet" media="screen" href="//assets.tumblr.com/client/prod/standalone/blog-network-npf/index.build.css">
     ```
     **Note:** if you're using [unnested captions](https://codepen.io/neothm/pen/PzVjRy) by neothm & magnusthemes, please make sure that my scripts are AFTER the unnest script! (Also, do not change the name of `.tumblr_parent`!)
     
 ---
     
 #### Potential Problems:
-If you're using the old dashboard captions, everything *should* run as intended.  
+If you're using the old dashboard captions (these typically have a thin left border), everything *should* run as intended.  
   
-However if you're using modern dashboard captions, depending on your theme, the html structure of the user icon & blog link may vary, and so the main photo could still be stuck under it. If you're fine with this, cool! But if you're picky like me, you can manually assign to trigger the rearranging.  
+However if you're using modern dashboard captions (user avatar + username), depending on your theme, the html structure of the user icon & blog link may vary, and so the main photo could still be stuck under it. If you're fine with this, cool! But if you're picky like me, you can manually assign to trigger the rearranging.  
 
 Within `{block:Text}`, you should find an element for the reblogger image, as well as the name of that user. Add `source-head` class to the wrapper!  
+Make sure `{Body}` is *not* included inside `source-head`.
 
 *   **Example 1:**
     ```html
@@ -76,6 +86,8 @@ Within `{block:Text}`, you should find an element for the reblogger image, as we
         <img src="{PortraitURL-64}">
         <a href="{Permalink}">{Username}</a>
     </div>
+
+    {Body}
     
     {/block:Reblogs}
     {/block:RebloggedFrom}
@@ -97,6 +109,8 @@ Within `{block:Text}`, you should find an element for the reblogger image, as we
             <a href="{Permalink}">{Username}</a>
         </span>
     </div>
+
+    {Body}
     
     {/block:Reblogs}
     {/block:RebloggedFrom}
