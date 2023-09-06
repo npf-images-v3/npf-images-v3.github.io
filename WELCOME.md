@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/07/07 11:01 GMT-7
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/09/06 1:41AM GMT-7
 
 #### Table of Contents:
 - [What is NPF?](#what-is-npf)
@@ -16,7 +16,7 @@
 > 
 > Whilst non-NPF posts can still be made via the desktop site, many users have preferred to blog via mobile instead. Little to no official documentation has been provided on how NPF works, and so far the default NPF stylesheet only really works for the default theme Optica. Hence, I wrote some modifications to make it look as 'natural' as possible, regardless of whatever theme you're using.
 > 
-> TLDR; all mobile posts are rendered as **text posts**, even if you're just posting a photo or a video. The only Tumblr block variable we know so far hasn't even changed - it's just `{Body}`. So if you're e.g. an artist, chances are that the picture you post won't be HD, and it will look out of place without further styling (which would be extremely helpful if we had - y'know - documentation).
+> TLDR; all mobile posts are rendered as **text posts**, even if you're just posting a photo or a video. The only Tumblr block variable we know so far hasn't changed - it's just `{Body}`. So if you're e.g. an artist, chances are that the picture you post won't be HD, and it will look out of place without further tinkering.
 
 ---
 
