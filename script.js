@@ -9,7 +9,8 @@
     > get 'deepest' element script by Balint Bako
       stackoverflow.com/a/18652986/8144506
 
-    Last updated: 2023-06-20
+    📍 v1.13.0 - 2023-09-05
+    🕒 Last updated: 2023-09-05 5:11PM [PDT]
     
 ---------------------------------------------------------*/
 
@@ -34,24 +35,6 @@ $(document).ready(function(){
     
     /*-------------------------------------------------*/
     
-    $(".npf_col .tmblr-full [data-big-photo-height]").each(function(){
-        $(this).parents(".npf_col").attr("h",$(this).attr("data-big-photo-height"))
-    })
-    
-    $(".npf_col .tmblr-full [data-big-photo-width]").each(function(){
-        $(this).parents(".npf_col").attr("w",$(this).attr("data-big-photo-width"))
-    })
-    
-    $(".npf_col .tmblr-full img[data-orig-height]").each(function(){
-        $(this).parents(".npf_col").attr("h",$(this).attr("data-orig-height"))
-    })
-    
-    $(".npf_col .tmblr-full img[data-orig-width]").each(function(){
-        $(this).parents(".npf_col").attr("w",$(this).attr("data-orig-width"))
-    })
-    
-    /*-------------------------------------------------*/
-    
     var spac = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--NPF-Image-Spacing"));
     
     $(".npf_row").each(function(){
@@ -67,34 +50,6 @@ $(document).ready(function(){
             $(this).children(".npf_col").attr("col-width",pognt)
         }
     })
-    
-    /*-------------------------------------------------*/
-    
-    // get the minified width & height values
-    $(".npf_col").each(function(){
-        var getratio = $(this).attr("w") / $(this).attr("h");
-        $(this).attr("ratio",getratio);
-        
-        var potato = $(this).attr("col-width") / Number(getratio);
-        potato = potato.toString();
-        potato = potato.substring(0,potato.lastIndexOf("."));
-        $(this).attr("col-height",potato);
-    })
-    
-    // get shortest column of that row
-    $(".npf_row").each(function(){
-        if($(this).find(".npf_col").length){
-            var quoi = $(this).children(".npf_col:not([col-height=''])").map(function(){
-                return $(this).attr("col-height");
-            }).get();
-            
-            var ngai = Math.min.apply(Math,quoi);
-            $(this).find(".tmblr-full").height(ngai);
-        }
-    });
-    
-    // remove the attributes bc they ugly
-    $(".npf_col").removeAttr("h w ratio")
     
     /*-------------------------------------------------*/
     
@@ -210,15 +165,28 @@ $(document).ready(function(){
             }
         })
     })
-    
-    // if: OLD BLOCKQUOTE CAPTIONS
+  
+    /*
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┇                                       ┇
+    ┇       OLD BLOCKQUOTE CAPTIONS         ┇
+    ┇                                       ┇
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+    */
+  
     $("[post-type='text']").each(function(){
+        // [1/2] find the first reblogger name <p>
+        // technically it's the "last" in the reblog chain
+        // but bc of how multiple blockquotes are structured,
+        // the "last" reblogger name <p> would appear as the first instance
         $(this).find("p").eq(0).each(function(){
             if($(this).find("a.tumblr_blog").length){
                 $(this).attr("last-comment","");
             }
         })
         
+        // [2/2] find the "deepest" blockquote,
+        // aka the OP's reblog trail/entry
         var maxDepth = 0;
         $(this).find("blockquote").each(function(){
             $(this).attr('depth', $(this).parents().length);
@@ -230,43 +198,91 @@ $(document).ready(function(){
         $('[depth="' + maxDepth + '"]').addClass("op-blockquote");
         $("blockquote[depth]").removeAttr("depth")
     });
-    
-    $(".op-blockquote").each(function(){
-        if($(this).prev().is("p")){
-            if($(this).prev().find("a.tumblr_blog").length){
-                
-                var finst = $(this).children().first();
-                var poo = $(this).parents("[post-type='text']").find("[last-comment]").eq(0);
-                
-                if(finst.is(".npf_inst")){
-                    if(finst.next().length){
-                        finst.addClass("photo-origin");
-                        finst.insertBefore(poo);
-                        if(finst.next().is("p")){
-                            finst.css("margin-bottom","var(--NPF-Caption-Spacing)");
-                        }
-                        
-                        // attempt to fix fked up reblog order
-                        if(!$(this).prev().prev().is(".photo-origin")){
-                            if(poo.next().is("blockquote")){
-                                $(this).add($(this).prev()).prependTo(poo.next("blockquote"))
-                            }
-                        }
-                    } else {
-                        // if npf does not have caption text
-                        var gp = $(this).prev("p").find("a.tumblr_blog");
-                        var gp_name = gp.text();
-                        var gp_url = gp.attr("href");
-                        finst.addClass("photo-origin");
-                        finst.addClass("npf-no-caption");
-                        finst.insertBefore(poo);
-                        poo.next(".op-blockquote").remove();
-                        poo.remove();
-                        finst.after("<p class='npf-post-source'>(Source: <a href='" + gp_url + "'>" + gp_name + "</a>)</p>")
-                    }
-                }
+  
+    // identify and relocate npf photosets where necessary
+    // (old blockquote capts)
+    $("[post-type='text'] .op-blockquote > .npf_inst:first-child").each(function(){
+      let postParent = $(this).parents("[post-type='text']");
+      let op_blockquote = $(this).parent(".op-blockquote");    
+
+      let check_p = op_blockquote.prev("p");
+      if(check_p.length){
+        let check_a = check_p.find("a.tumblr_blog");
+        if(check_a.length){
+
+          // check_p.addClass("PEE")
+          // check_a.addClass("AYY")
+
+          /*---------------------------------------*/
+
+          // deal with captionless npf
+
+          if(!$(this).next().length){
+            $(this).addClass("photo-origin npf-no-caption");
+
+            // put npf photoset above reblog chain
+            postParent.find("p[last-comment]").before($(this));
+
+            // remove captionless npf photoset's blockquote border
+            op_blockquote.remove();
+
+            // put captionless npf post source AFTER the reblog chain
+            postParent.find("p[last-comment]").parent().append(check_p)
+
+            check_p.before(check_a);
+            check_p.remove();
+
+            check_a.wrap("<p class='npf-post-source'>(Source: </p>");
+            check_a.parent(".npf-post-source").append(")");
+            check_a.removeClass("tumblr_blog")
+          }
+
+          /*---------------------------------------*/
+
+          // deal with npf WITH caption
+
+          else {
+            let theNext = $(this).next();
+            let theContents = theNext.html().trim();
+            if(theContents !== ""){
+              $(this).addClass("photo-origin");
+
+              // put npf photoset above reblog chain
+              postParent.find("p[last-comment]").before($(this));
+              $(this).css("margin-bottom","var(--NPF-Caption-Spacing)");
             }
+
+            // deal with captionless npf (part 2, just in case)
+            else {
+              $(this).addClass("photo-origin npf-no-caption");
+
+              // put npf photoset above reblog chain
+              postParent.find("p[last-comment]").before($(this));
+
+              // remove captionless npf photoset's blockquote border
+              op_blockquote.remove();
+
+              // put captionless npf post source AFTER the reblog chain
+              postParent.find("p[last-comment]").parent().append(check_p)
+
+              check_p.before(check_a);
+              check_p.remove();
+
+              check_a.wrap("<p class='npf-post-source'>(Source: </p>");
+              check_a.parent(".npf-post-source").append(")");
+              check_a.removeClass("tumblr_blog")
+            }
+          }
+
         }
+      }
+    })
+  
+    /*-------------------------------------------------*/
+  
+    $(".npf_inst + p, p.tmblr-attribution").each(function(){
+      $(this).css("display","block")
+      $(this).css("margin-top","1em")
     })
     
     /*-------------------------------------------------*/
@@ -309,7 +325,7 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", () => {
   // lightbox functionality
-  fetch("https://static.tumblr.com/gtjt4bo/mQyru9n7h/quick_tumblr_lightbox.js")
+  fetch("https://static.tumblr.com/gtjt4bo/nqts0jf5w/quick_tumblr_lightbox.js")
   .then(response => response.text())
   .then(getContents => {
       let makeScript = document.createElement("script");
@@ -319,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
   // target stray NPFs that are supposed to be .photo-origin
   // ideally: old blockquote captions
+  // example: glen-px.tumblr.com/post/666539156716093440
   let targetStrayNPF = document.querySelectorAll("[post-type='text'] blockquote:not(.op-blockquote) > .npf_inst:first-child");
   targetStrayNPF ? targetStrayNPF.forEach(tsNPF => {
       let elp = tsNPF.parentNode.previousElementSibling;
@@ -326,7 +343,8 @@ document.addEventListener("DOMContentLoaded", () => {
           if(elp.querySelector("a.tumblr_blog")){
               if(!elp.previousElementSibling){
                   elp.parentNode.prepend(tsNPF);
-                  tsNPF.classList.add("photo-origin")
+                  tsNPF.classList.add("photo-origin");
+                  tsNPF.style.marginBottom = "var(--NPF-Caption-Spacing)"
               }
           }
       }
