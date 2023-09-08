@@ -1,10 +1,11 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/09/06 1:41AM GMT-7
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/09/08 10:08AM GMT-7
 
 #### Table of Contents:
 - [What is NPF?](#what-is-npf)
 - [Features](#features)
+- [Limitations](#limitations)
 - [How to install](#how-to-install)
 - [Potential problems](#potential-problems)
 - [Further support](#further-support)
@@ -30,6 +31,13 @@
 
 - [x] repositions main image to top of post if they were meant to look like photo posts (e.g. for artists)
 - [x] removes the blockquote border on the main image
+
+---
+
+#### Limitations:
+- Relies on jQuery (usually works with any version except for `1.9.1`)
+- Does ***not*** work with [infinite scroll](https://infiniteajaxscroll.com/infinite-scroll-faq).
+  If your theme uses infinite scroll, **please turn it off**.
 
 ---
 
