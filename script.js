@@ -9,8 +9,8 @@
     > get 'deepest' element script by Balint Bako
       stackoverflow.com/a/18652986/8144506
 
-    📍 v1.13.1 - 2023-09-20
-    🕒 Last updated: 2023-09-20 8:50PM [PDT]
+    📍 v1.13.0 - 2023-09-05
+    🕒 Last updated: 2023-09-05 5:11PM [PDT]
     
 ---------------------------------------------------------*/
 
@@ -179,11 +179,9 @@ $(document).ready(function(){
         // technically it's the "last" in the reblog chain
         // but bc of how multiple blockquotes are structured,
         // the "last" reblogger name <p> would appear as the first instance
-        $(this).find("p").each(function(i, e){
+        $(this).find("p").eq(0).each(function(){
             if($(this).find("a.tumblr_blog").length){
-                if(i == 1){
-                    $(this).attr("last-comment","");
-                }
+                $(this).attr("last-comment","");
             }
         })
         
@@ -212,8 +210,8 @@ $(document).ready(function(){
         let check_a = check_p.find("a.tumblr_blog");
         if(check_a.length){
 
-          check_p.addClass("PEE")
-          check_a.addClass("AYY")
+          // check_p.addClass("PEE")
+          // check_a.addClass("AYY")
 
           /*---------------------------------------*/
 
