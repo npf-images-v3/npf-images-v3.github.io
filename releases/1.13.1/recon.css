@@ -1,0 +1,122 @@
+.npf_row {
+    margin-left:0!important;
+    margin-right:0!important;
+    display:flex!important;
+    align-items:stretch!important;
+}
+
+/* i dont even know what crt-video is but it's apparently in the default t*mblr stylesheet so I will go ahead and unpoop that */
+.crt-video + .npf_row,
+.npf_row + .crt-video,
+.npf_row + p,
+p + .npf_row {
+    margin-top:var(--NPF-Caption-Spacing)!important;
+}
+
+/* stray single npf not wrapped in a .npf_row */
+.tmblr-full + .npf_row {
+    margin-top:var(--NPF-Image-Spacing)!important;
+}
+
+.npf_row + .npf_row,
+.npf_row + .tmblr-full {
+    margin-top:var(--NPF-Image-Spacing)!important;
+}
+
+.npf_col {
+    padding:0!important;
+    flex:1;
+}
+
+/* npf-col 1st */
+.npf_col:first-child {
+    padding:0!important;
+}
+
+/* npf-col 2nd */
+.npf_col + .npf_col {
+    padding:0 var(--NPF-Image-Spacing)!important;
+}
+
+.npf_col:first-child:nth-last-child(2),
+.npf_col:first-child:nth-last-child(2) ~ .npf_col {
+    padding-right:0!important;
+}
+
+/* npf-col 3rd */
+.npf_col + .npf_col + .npf_col {
+    padding:0!important;
+}
+
+/* maximize height of .npf_col images */
+[post-type="text"] .npf_col img {
+    height:100%!important;
+}
+
+.tmblr-full {
+    margin:0!important;
+    padding-bottom:0!important;
+}
+
+*:not(.npf_row) > .tmblr-full + .tmblr-full {
+    margin-top:var(--NPF-Image-Spacing)!important;
+}
+
+.post_media_photo, .tmblr-full img {
+    position:initial!important;
+    text-decoration:none;
+}
+
+.post_media_photo_anchor {
+    padding:0;
+    border:none;
+    height:auto!important;
+    width:inherit;
+}
+
+.post_media_photo_anchor, .tmblr-full img,
+.tmblr-full video, .tmblr-full audio[controls]{
+    line-height:0;
+}
+
+.tmblr-full img {
+    position:initial!important;
+    cursor:pointer;
+    vertical-align:middle;
+    max-width:100%;
+    height:auto;
+    object-fit:cover;
+}
+
+/*
+.photo-origin .tmblr-full img {
+    width:100%;
+}
+*/
+
+.npf_inst > * {
+    margin-top:0!important;
+    margin-bottom:var(--NPF-Image-Spacing)!important;
+}
+
+.npf_inst > *:last-child {
+    margin-bottom:0!important;
+}
+
+[post-type='text'] .npf_inst > .tmblr-full img {
+    width:100%;
+    height:auto;
+}
+
+.lb-cont {
+    top:50%!important;
+    left:50%!important;
+    transform:translate(-50%,-50%);
+}
+
+.lb-img {
+    width:initial!important;
+    height:initial!important;
+    max-width:80vw;
+    max-height:80vh;
+}
