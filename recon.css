@@ -45,7 +45,10 @@ p + .npf_row {
 
 /* npf-col 3rd */
 .npf_col + .npf_col + .npf_col {
-    padding:0!important;
+    /*padding:0!important;*/
+    padding-top:0!important;
+    padding-right:0!important;
+    padding-bottom:0!important;
 }
 
 /* maximize height of .npf_col images */
