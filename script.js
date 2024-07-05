@@ -9,8 +9,8 @@
     > get 'deepest' element script by Balint Bako
       stackoverflow.com/a/18652986/8144506
 
-    📍 v1.13.1 - 2023-09-20
-    🕒 Last updated: 2023-09-20 8:50PM [PDT]
+    📍 v1.13.2 - 2024-07-04
+    🕒 Last updated: 2024-07-04 11:25PM [PDT]
     
 ---------------------------------------------------------*/
 
@@ -81,19 +81,6 @@ $(document).ready(function(){
         }
     })
     
-    // redo the .npf_inst wrapping
-    $(".npf_inst").each(function(){
-        $(this).not(".npf_inst + .npf_inst").each(function(){
-            if(ver < "180"){
-                $(this).nextUntil(":not(.npf_inst").andSelf().wrapAll('<div class="npf_inst">');
-                $(this).nextUntil(":not(.npf_inst").andSelf().children().unwrap();
-            } else {
-                $(this).nextUntil(":not(.npf_inst").addBack().wrapAll('<div class="npf_inst">');
-                $(this).nextUntil(":not(.npf_inst").addBack().children().unwrap();
-            }
-        });
-    })
-    
     // wrap single containerless .tmblr-fulls
     $(".tmblr-full").each(function(){
         if(!$(this).parents(".npf_inst").length){
@@ -101,6 +88,27 @@ $(document).ready(function(){
                 $(this).wrap("<div class='npf_inst'>")
             }
         }
+    })
+
+    // deal with npf audios
+    let data_npf_audios = `figure[data-npf*='"type":"audio"']`;
+    $(data_npf_audios).each(function(){
+        if(!$(this).parents(".npf_inst").length){
+            $(this).wrap("<div class='npf_inst'>")
+        }
+    })
+    
+    // redo the .npf_inst wrapping
+    $(".npf_inst").each(function(){
+        $(this).not(".npf_inst + .npf_inst").each(function(){
+            if(ver < "180"){
+                $(this).nextUntil(":not(.npf_inst)").andSelf().wrapAll('<div class="npf_inst">');
+                $(this).nextUntil(":not(.npf_inst)").andSelf().children().unwrap();
+            } else {
+                $(this).nextUntil(":not(.npf_inst)").addBack().wrapAll('<div class="npf_inst">');
+                $(this).nextUntil(":not(.npf_inst)").addBack().children().unwrap();
+            }
+        });
     })
     
     /*-------------------------------------------------*/
