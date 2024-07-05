@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2023/09/08 10:08AM GMT-7
+###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2024/07/04 11:25PM GMT-7
 
 #### Table of Contents:
 - [What is NPF?](#what-is-npf)
@@ -27,8 +27,7 @@
 - [x] stops images from being squashed (default height is apparently 75%. WHO thought this was a good idea?!)
 - [x] custom spacing between images
 - [x] custom spacing between images and captions
-- [x] ![new___by_kittyrocker_d92ktsr](https://user-images.githubusercontent.com/88550643/233545907-ff557354-f080-4040-adf0-f3ffe7fce86c.gif) lightbox support &mdash; now functions like traditional photoset lightboxes!
-
+- [x] lightbox support &mdash; functions like traditional photoset lightboxes
 - [x] repositions main image to top of post if they were meant to look like photo posts (e.g. for artists)
 - [x] removes the blockquote border on the main image
 
@@ -129,7 +128,7 @@ Make sure `{Body}` is *not* included inside `source-head`.
 💌 I hope that was clear! I tried my best to do a one-size-fits-all mod that's easy to install for those unfamiliar with code, but ultimately it isn't perfect. If you run into any issues, or are confused, please contact me either in the **`#theme-help`** channel of my [Discord server](https://discord.gg/RcMKnwz), or send me a Discord DM! I generally reply within 12 hours. To make it faster for both of us, you should:
 * send a link to your blog
 * clarify what theme you are using, and by whom
-* copy your full theme code into [ghostbin](https://paste.bingner.com/) or [pastery](https://pastery.net) - no title or password required - hit save, then send me the link!
+* copy your full theme code into [ghostbin](https://pst.innomi.net/) or [pastery](https://pastery.net) - no title or password required - hit save, then send me the link!
 
 ---
 
