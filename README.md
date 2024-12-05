@@ -12,6 +12,11 @@
 
 ---
 
+⚠️&#x2004;Version 4 is in beta (no jQuery), recommended over this one (v3):\
+🔗&#x2004;[gitlab.com/glen-npf/v4-beta/-/blob/main/README.md](https://gitlab.com/glen-npf/v4-beta/-/blob/main/README.md)
+
+---
+
 #### What is NPF?
 > NPF stands for "Neue Post Format". Tumblr used to have multiple types of post formats to choose from (namingly text, photo, quote, link, chat, video, questions), but in recent years they've started to turn many of those formats into NPF only (in other words, **everything becomes a text post**). This means that all images uploaded via Tumblr mobile have turned into **NPF images**. NPF images can also refer to images between paragraphs.
 > 
