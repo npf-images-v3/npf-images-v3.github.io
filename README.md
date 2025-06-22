@@ -133,7 +133,7 @@ Make sure `{Body}` is *not* included inside `source-head`.
 💌 I hope that was clear! I tried my best to do a one-size-fits-all mod that's easy to install for those unfamiliar with code, but ultimately it isn't perfect. If you run into any issues, or are confused, please contact me either in the **`#theme-help`** channel of my [Discord server](https://discord.gg/RcMKnwz), or send me a Discord DM! I generally reply within 12 hours. To make it faster for both of us, you should:
 * send a link to your blog
 * clarify what theme you are using, and by whom
-* copy your full theme code into [ghostbin](https://pst.innomi.net/) or [pastery](https://pastery.net) - no title or password required - hit save, then send me the link!
+* copy your full code (tutorial: [glenthemes.notion.site/dpaste-tutorial](https://glenthemes.notion.site/dpaste-tutorial)) and send me the link!
 
 ---
 
