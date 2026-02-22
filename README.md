@@ -1,6 +1,6 @@
 # NPF images fix for Tumblr
 
-###### WRITTEN BY @GLENTHEMES [2021] — last updated: 2024/07/04 11:25PM GMT-7
+###### WRITTEN BY @GLENTHEMES [2021]
 
 #### Table of Contents:
 - [What is NPF?](#what-is-npf)
@@ -12,8 +12,13 @@
 
 ---
 
-⚠️&#x2004;Version 4 is in beta (no jQuery), recommended over this one (v3):\
-🔗&#x2004;[gitlab.com/glen-npf/v4-beta/-/blob/main/README.md](https://gitlab.com/glen-npf/v4-beta/-/blob/main/README.md)
+> [!TIP]
+> [Version 4 is out!](https://github.com/glenthemes/npf-images-v4)
+
+New features to v4 that v3 lacks:
+- no jQuery dependencies
+- automatic infinite scroll support
+- [optional] custom callback function(s) you can run after the fix has been applied.
 
 ---
 
